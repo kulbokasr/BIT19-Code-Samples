@@ -1,31 +1,31 @@
-﻿using System;
-using SampleConsoleApp;
-
-namespace HelloWorld
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-
-            //var dog1 = new Dog();
-            //dog1.Bark();
-            //Dog.StaticBark();
-            
+﻿//using SampleConsoleApp.Animals;
+//using System;
 
 
-            var randomNumber = GetNumber();
-            PrintInfo(randomNumber);
-        }
+//namespace HelloWorld
+//{
+//    class Program
+//    {
+//        static void Main(string[] args)
+//        {
 
-        public static void PrintInfo(int info)
-        {
-            Console.WriteLine(info);
-        }
+//            //var dog1 = new Dog();
+//            //dog1.Bark();
+//            //Dog.StaticBark();
+//            var dog = new Dog();
 
-        public static int GetNumber()
-        {
-            return 5;
-        }
-    }
-}
+//            var randomNumber = GetNumber();
+//            PrintInfo(randomNumber);
+//        }
+
+//        public static void PrintInfo(int info)
+//        {
+//            Console.WriteLine(info);
+//        }
+
+//        public static int GetNumber()
+//        {
+//            return 5;
+//        }
+//    }
+//}
