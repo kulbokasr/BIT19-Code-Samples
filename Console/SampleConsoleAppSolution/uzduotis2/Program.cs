@@ -148,57 +148,122 @@ namespace WorkingWithLists
 
 
             //3
-            Random rand = new Random();
-            List<char> raides = new List<char>();
-            for (int i = 0; i < 200; i++)
-            {
-                raides.Add((char)rand.Next('A', 'E'));
-            }
+            //Random rand = new Random();
+            //List<char> raides = new List<char>();
+            //for (int i = 0; i < 200; i++)
+            //{
+            //    raides.Add((char)rand.Next('A', 'E'));
+            //}
 
-            raides.ForEach(a => Console.WriteLine(a));
+            //raides.ForEach(a => Console.WriteLine(a));
 
-            int sumA , sumB , sumC , sumD;
-            sumA = sumB = sumC = sumD = 0;
+            //int sumA , sumB , sumC , sumD;
+            //sumA = sumB = sumC = sumD = 0;
 
 
-            for (int i = 0;i < raides.Count();i++)
-            {
-                if (raides[i] == 'A')
-                    sumA++;
-                else
-                if (raides[i] == 'B')
-                    sumB++;
-                else
-                if (raides[i] == 'C')
-                    sumC++;
-                else
-                if (raides[i] == 'D')
-                    sumD++;
-            }
-            Console.WriteLine(" ");
-            Console.WriteLine("A yra " + sumA + " B yra " + sumB + " C yra " + sumC + " D yra " + sumD);
+            //for (int i = 0;i < raides.Count();i++)
+            //{
+            //    if (raides[i] == 'A')
+            //        sumA++;
+            //    else
+            //    if (raides[i] == 'B')
+            //        sumB++;
+            //    else
+            //    if (raides[i] == 'C')
+            //        sumC++;
+            //    else
+            //    if (raides[i] == 'D')
+            //        sumD++;
+            //}
+            //Console.WriteLine(" ");
+            //Console.WriteLine("A yra " + sumA + " B yra " + sumB + " C yra " + sumC + " D yra " + sumD);
 
-            //4
+            ////4
 
-            Console.WriteLine(" ");
-            for (int i = 0; i < raides.Count(); i++)
-            {
-                for (int j = 0; j < raides.Count() ; j++)
-                {
-                    if (raides[i] < raides[j])
-                    {
-                        char tempValue = raides[i];
-                        raides[i] = raides[j];
-                        raides[j] = tempValue;
-                    }
-                        
-                }
-            }
+            //Console.WriteLine(" ");
+            //for (int i = 0; i < raides.Count(); i++)
+            //{
+            //    for (int j = 0; j < raides.Count() ; j++)
+            //    {
+            //        if (raides[i] < raides[j])
+            //        {
+            //            char tempValue = raides[i];
+            //            raides[i] = raides[j];
+            //            raides[j] = tempValue;
+            //        }
 
-            raides.ForEach(a => Console.WriteLine(a));
+            //    }
+            //}
+
+            //raides.ForEach(a => Console.WriteLine(a));
 
             //5
 
+            //Random rand = new Random();
+            //List<char> raides1 = new List<char>();
+            //for (int i = 0; i < 200; i++)
+            //{
+            //    raides1.Add((char)rand.Next('A', 'E'));
+            //}
+
+            //List<char> raides2 = new List<char>();
+            //for (int i = 0; i < 200; i++)
+            //{
+            //    raides2.Add((char)rand.Next('A', 'E'));
+            //}
+
+            //List<char> raides3 = new List<char>();
+            //for (int i = 0; i < 200; i++)
+            //{
+            //    raides3.Add((char)rand.Next('A', 'E'));
+            //}
+
+            //List<string> raides4 = new List<string>();
+            //for (int i = 0; i < 200; i++)
+            //{
+            //    raides4.Add(Convert.ToString(raides1[i]) + Convert.ToString(raides2[i]) + Convert.ToString(raides3[i]));
+            //}
+
+
+            ////raides4.ForEach(a => Console.WriteLine(a));
+
+            //int unikaliKombinacija = raides4.Count;
+            //List<int> pasikartojantys = new List<int>();
+
+            //for (int i = 0; i < raides4.Count() - 1; i++)
+            //{
+            //    for (int j = i + 1; j < raides4.Count(); j++)
+            //    {
+            //        if (raides4[i] == raides4[j])
+            //        {
+            //            unikaliKombinacija = unikaliKombinacija - 1;
+            //            pasikartojantys.Add(i);
+            //            pasikartojantys.Add(j);
+            //            break;
+            //        }
+
+            //    }
+            //}
+            //Console.WriteLine("Unikaliu reiksmiu yra:");
+            //Console.WriteLine(raides4.Count() - pasikartojantys.Distinct().Count());
+            //Console.WriteLine("Unikaliu kombinaciju yra " + unikaliKombinacija);
+
+
+            //6
+
+            Random rand = new Random();
+            int[] skaiciai = new int[10];
+            skaiciai[0]= rand.Next(5,26);
+            skaiciai[1]= rand.Next(5,26);
+            for (int i = 2; i < 10; i++)
+            {
+                skaiciai[i] = skaiciai[i-1] + skaiciai[i-2];
+            }
+
+            for (int i = 0; i < skaiciai.Length; i++)
+            {
+                Console.WriteLine(skaiciai[i]);
+            }
 
 
         }
