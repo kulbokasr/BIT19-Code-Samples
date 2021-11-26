@@ -5,7 +5,15 @@ VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleConsoleApp", "SampleConsoleApp\SampleConsoleApp.csproj", "{B99A4BB5-A587-4FB7-970B-5EF25232EC14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkingWithLists", "WorkingWithLists\WorkingWithLists.csproj", "{2A76A7C1-AC4B-4D1A-862F-CD8063B6CEA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkingWithLists", "WorkingWithLists\WorkingWithLists.csproj", "{2A76A7C1-AC4B-4D1A-862F-CD8063B6CEA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uzduotis1", "uzduotis\uzduotis1.csproj", "{7BE5576B-E5D8-46E1-B62E-10B021D9E0DA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uzduotis2", "uzduotis2\uzduotis2.csproj", "{1088D75F-564A-4B6A-ABCF-0D2C63D51D41}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "uzduotis2 - destyjo objectinio prog example", "uzduotis2 - destyjo objectinio prog example\uzduotis2 - destyjo objectinio prog example.csproj", "{9F5DF972-FD15-41D6-9F23-07B4B6A746CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApplication", "TodoApplication\TodoApplication.csproj", "{E9E84C14-9A6A-472A-8112-2821BEF00A56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,22 @@ Global
 		{2A76A7C1-AC4B-4D1A-862F-CD8063B6CEA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A76A7C1-AC4B-4D1A-862F-CD8063B6CEA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A76A7C1-AC4B-4D1A-862F-CD8063B6CEA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BE5576B-E5D8-46E1-B62E-10B021D9E0DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BE5576B-E5D8-46E1-B62E-10B021D9E0DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BE5576B-E5D8-46E1-B62E-10B021D9E0DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BE5576B-E5D8-46E1-B62E-10B021D9E0DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1088D75F-564A-4B6A-ABCF-0D2C63D51D41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1088D75F-564A-4B6A-ABCF-0D2C63D51D41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1088D75F-564A-4B6A-ABCF-0D2C63D51D41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1088D75F-564A-4B6A-ABCF-0D2C63D51D41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F5DF972-FD15-41D6-9F23-07B4B6A746CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F5DF972-FD15-41D6-9F23-07B4B6A746CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F5DF972-FD15-41D6-9F23-07B4B6A746CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F5DF972-FD15-41D6-9F23-07B4B6A746CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9E84C14-9A6A-472A-8112-2821BEF00A56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9E84C14-9A6A-472A-8112-2821BEF00A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9E84C14-9A6A-472A-8112-2821BEF00A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9E84C14-9A6A-472A-8112-2821BEF00A56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

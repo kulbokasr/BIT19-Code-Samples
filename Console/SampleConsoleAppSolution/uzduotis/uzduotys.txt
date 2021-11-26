@@ -1,0 +1,21 @@
+﻿1.	Sukurkite 4 kintamuosius, kurie saugotų jūsų vardą, pavardę, gimimo metus ir šiuos metus (nebūtinai tikrus). Parašykite kodą, kuris pagal gimimo metus paskaičiuotų jūsų amžių ir naudodamas vardo ir pavardės kintamuosius atspausdintų tokį sakinį :
+"Aš esu Vardenis Pavardenis. Man yra XX metai(ų)".
+2.	
+a.	 Sukurkite tuščią masyvą (array, ne list).
+b.	Užpildykite jį 7-iais kursiokų vardais.
+c.	Atspausdinkite visus masyve esančius vardus.
+3.	 
+ .	Sukurkite tuščią masyvą (array, ne list).
+a.	Užpildykite jį 5-iais atsitiktiniais skaičiais nuo 5 iki 10. (Naudokite ciklą masyvo užpildymui).
+b.	Atspausdinkite visus masyve esančius skaičius.
+c.	Papildykite masyvą dar 5-iais atsitiktiniais skaičiais nuo 5 iki 10.(Naudokite ciklą masyvo papildymui).
+d.	Atspausdinkite visus masyve esančius skaičius.
+4.	Sukurkite dvimatį masyvą 10x10.
+ .	Naudodamiesi ciklais užpildykite jį daugybos lentele nuo 0 iki 9.
+a.	Pasinaudoję ciklais atspausdinkite dvimatį masyvą taip, kad Consolėje matytume daugybos lentelę.  
+i.	HINT:  Spaustina toje pačioje eilutėje.Console.Write("");
+ii.	Spausdina sekančioje eilutėje. Console.WriteLine("");
+5.	Įvedami skaičiai -a, b, c –kraštinių ilgiai, trys kintamieji (naudojame int) (nuo 1 iki 10). Parašykite C# programą, kuri nustatytų, ar galima sudaryti trikampį ir atsakymą atspausdintų. Naudokite Console.ReadLine() priimti įvestis.
+6.	Įmonė parduoda žvakes po 1 EUR. Perkant daugiau kaip už 1000 EUR taikoma 3 % nuolaida, daugiau kaip už 2000 EUR - 4 % nuolaida. Parašykite programą, kuri skaičiuos žvakių kainą ir atspausdintų atsakymą kiek žvakių ir kokia kaina perkama. Žvakių kiekį generuokite random funkcija nuo 5 iki 3000.
+7.	Padarykite skaitmeninį laikrodį, rodantį valandas, minutes ir sekundes. Valandom, minutėm ir sekundėm sugeneruoti panaudokite funkciją random. Sugeneruokite skaičių nuo 0 iki 300. Tai papildomos sekundės. Skaičių pridėkite prie jau sugeneruoto laiko. Atspausdinkite laikrodį prieš ir po sekundžių pridėjimo ir pridedamų sekundžių skaičių.
+

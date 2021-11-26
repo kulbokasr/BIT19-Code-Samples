@@ -1,0 +1,29 @@
+﻿Sugeneruokite masyvą iš 30 elementų, kurių reikšmės yra atsitiktiniai skaičiai nuo 5 iki 25. Atsispausdinate, pasižiūrite ką gavote.
+Naudodamiesi 1 uždavinio masyvu:
+Suskaičiuokite kiek masyve yra reikšmių didesnių už 10;
+Raskite didžiausią masyvo reikšmę ir jos indeksą arba indeksus jeigu yra keli ir atspausdinkite.
+Suskaičiuokite visų porinių (lyginių) indeksų reikšmių sumą;
+Sukurkite naują masyvą, kurio reikšmės yra 1 uždavinio masyvo reikšmes minus tos reikšmės indeksas; PVZ -
+Indeksai   0, 1, 2, 3
+Reiksmes 1, 17, 40, 3
+Rezultatas 1, 16, 38, 0
+Iš masyvo elementų sukurkite du naujus masyvus. Vienas turi būti sudarytas iš neporinių indekso reikšmių, o kitas iš porinių;
+Pirminio masyvo elementus su poriniais indeksais padarykite lygius 0 jeigu jie didesni už 15;
+Suraskite pirmą (mažiausią) indeksą, kurio elemento reikšmė didesnė už 10;
+
+
+3. Sugeneruokite masyvą, kurio reikšmės atsitiktinės raidės A, B, C ir D, o ilgis 200. Suskaičiuokite kiek yra kiekvienos raidės.
+4. Išrūšiuokite 3 uždavinio masyvą pagal abecėlę.
+5. Sugeneruokite 3 masyvus pagal 3 uždavinio sąlygą. Sudėkite masyvus, sudėdami atitinkamas reikšmes. Paskaičiuokite kiek unikalių (po vieną, nesikartojančių) reikšmių ir kiek unikalių kombinacijų gavote.
+A,C,B,D,A
+C,C,B,B,C
+A,A,D,D,A
+ACA,CCA,BBD,DBD,ACA - TRYS UNIKALIOS, 4 KOMBINACIJOS
+
+5. Sugeneruokite 10 skaičių masyvą pagal taisyklę: Du pirmi skaičiai- atsitiktiniai nuo 5 iki 25. Trečias, pirmo ir antro suma. Ketvirtas- antro ir trečio suma. Penktas trečio ir ketvirto suma ir t.t.
+
+Extra:
+Reikia nupaišyti pilnavidurį rombą, taip pat, kaip ir pilnavidurį kvadratą (https://lt.wikipedia.org/wiki/Rombas), kurio aukštis 21 eilutė.
+
+
+

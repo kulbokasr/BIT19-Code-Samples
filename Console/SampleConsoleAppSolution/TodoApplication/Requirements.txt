@@ -1,0 +1,19 @@
+﻿Create an console application which would store your Todos
+Each todo should have: 
+	Name: String,
+	Description: String,
+	Completed: Boolean.
+
+
+
+Possible commands:
+Add -> 
+	"Enter todo name"
+	-> Todo1
+	"Enter todo descrption"
+	-> Todo Descrption
+
+List ->
+The command should display all todos line by line;
+Name: Todo1, Description: Todo Descrption
+Name: Todo2, Description: Todo2 Descrption
