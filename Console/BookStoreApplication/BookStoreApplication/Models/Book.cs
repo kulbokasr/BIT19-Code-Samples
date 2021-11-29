@@ -18,6 +18,10 @@ namespace BookStoreApplication.Models
             Description = description;
             Amount = amount;
         }
+
+
+
+
     }
 
 

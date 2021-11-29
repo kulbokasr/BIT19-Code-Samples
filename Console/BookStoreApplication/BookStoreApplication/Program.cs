@@ -2,17 +2,31 @@
 
 
 using BookStoreApplication.Models;
+using System.Linq;
+using BookStoreApplication;
+
 
 var books = new List<Book>();
+
+void ListFun(List<Book> books)
+{
+
+    Console.WriteLine("Books list:");
+    foreach (var book in books)
+    {
+        Console.WriteLine($"Title: {book.Title}, description: {book.Description}, amount: {book.Amount}");
+    }
+}
+
 
 while (true)
 {
     var erroras = 0;
-    Console.WriteLine("Please choose command: Add, List or Delete");
+    Console.WriteLine("Please choose command: Add, List, Update or Delete");
 
     var command = Console.ReadLine();
     
-    if (command == "Add")
+    if (command.ToLower() == "Add")
     {
         Console.WriteLine("Please provide title");
         string title = Console.ReadLine();
@@ -42,27 +56,47 @@ while (true)
 
     if (command == "List")
     {
-        Console.WriteLine("Books list:");
-        foreach (var book in books)
-        {
-            Console.WriteLine($"Title: {book.Title}, description: {book.Description}, amount: {book.Amount}");
-        }
+        ListFun(books);
     }
 
-    if (command == "Delete")
-    {
-        // todos = todos.Where(t => t.Completed == true).ToList();
-        //Use String.Split
-        Console.WriteLine("Please provide title of the book you want to delete");
-        string delName = Console.ReadLine();
+    //if (command == "Delete")
+    //{
+    //    // todos = todos.Where(t => t.Completed == true).ToList();
+    //    //Use String.Split
+    //    Console.WriteLine("Please provide title of the book you want to delete");
+    //    string delName = Console.ReadLine();
 
       
-        books.RemoveAll(x => x.Title == delName);
+    //    books.RemoveAll(x => x.Title == delName);
+
+    //}
+
+    if (command == "Update")
+    {
+        Console.WriteLine("Please provide title of the book you want to change");
+        string changeName = Console.ReadLine();
+        Console.WriteLine("Please provide new title");
+        string newName = Console.ReadLine();
+
+        books.Where(x => x.Title == changeName).ToList().ForEach(x => x.Title = newName);
+    }
+
+
+    if (command.Contains("Delete"))
+    {
+        string bookName = command.Split("Delete ", StringSplitOptions.None).Last();
+        Console.WriteLine(bookName);
+        try
+        {
+            var item = books.Single(x => x.Title.Equals(bookName));
+            books.Remove(item);
+        }
+        catch { Console.WriteLine("No title ..."); }
 
     }
 
+
+
+
 }
-
-
-
 
