@@ -13,13 +13,16 @@ namespace ClassApplication
         public string Name { get; set; }
         public string Surname { get; set; }
         public Grade grade { get; set; }
+        public int ClassGrade { get; set; }
 
         public Student(string name, string surname, Grade grade)
         {
+            Random rand = new Random();
             Name = name;
             this.grade = grade;
             Surname = surname;
             Id = ++IdCounter; 
+            ClassGrade = rand.Next(1,3);
          }
     }
 }

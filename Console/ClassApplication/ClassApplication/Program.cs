@@ -5,7 +5,7 @@ var StudentConsole = new StudentConsole();
 
 while (true)
 {
-    Console.WriteLine("Please choose command: Create, List, Choose, Delete, Update, BestAverage, BestOfBest");
+    Console.WriteLine("Please choose command: Create, List, Choose, Delete, Update, BestAverage, BestOfBest, BestAverageClass");
     var command = Console.ReadLine();
 
     switch (command)
@@ -35,6 +35,13 @@ while (true)
             break;
         case "BestOfBest":
             StudentConsole.BestOfBest();
+            break;
+        case "BestAverageClass":
+            Console.WriteLine("Please enter class: math or biology");
+            string lessonName1 = Console.ReadLine();
+            Console.WriteLine("Please enter class: 1 or 2");
+            int classgrade = Convert.ToInt32(Console.ReadLine());
+            StudentConsole.BestAverageClass(StudentConsole.students, lessonName1, classgrade);
             break;
 
         default:

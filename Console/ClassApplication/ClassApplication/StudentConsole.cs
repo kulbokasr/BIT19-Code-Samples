@@ -37,23 +37,31 @@ namespace ClassApplication
         public void List()
         {
             foreach (var student in students)
-                Console.WriteLine(student.Name + " " + student.Surname + " " + student.Id);
+                Console.WriteLine($"Id: {student.Id}, vardas: {student.Name}, pavarde: {student.Surname}, klase: {student.ClassGrade}");
         }
 
         public void Choose()
         {
             Console.WriteLine("Please enter id of the student to see grades");
-            var stId = Convert.ToInt32(Console.ReadLine());
-            foreach (var student in students)
-                if (student.Id == stId)
-                {
-                    Console.WriteLine("Biologija");
-                    student.grade.biology.ForEach(i => Console.WriteLine(i));
-                    Console.WriteLine("Vidurkis: " + student.grade.biology.Average());
-                    Console.WriteLine("Matematika");
-                    student.grade.math.ForEach(i => Console.WriteLine(i));
-                    Console.WriteLine("Vidurkis: " + student.grade.math.Average());
-                }
+            try
+            {
+                var stId = Convert.ToInt32(Console.ReadLine());
+
+                foreach (var student in students)
+                    if (student.Id == stId)
+                    {
+                        Console.WriteLine("Biologija");
+                        student.grade.biology.ForEach(i => Console.WriteLine(i));
+                        Console.WriteLine("Vidurkis: " + student.grade.biology.Average());
+                        Console.WriteLine("Matematika");
+                        student.grade.math.ForEach(i => Console.WriteLine(i));
+                        Console.WriteLine("Vidurkis: " + student.grade.math.Average());
+                    }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Wrong input");
+            }
 
         }
         public void Delete()
@@ -116,11 +124,40 @@ namespace ClassApplication
         public void BestOfBest()
         {
             List<double> averages = new List<double>();
-            for (int i = 0;i < students.Count;i++)
+            for (int i = 0; i < students.Count; i++)
             {
                 averages.Add(students[i].grade.math.Average() + students[i].grade.biology.Average());
             }
-            Console.WriteLine($"Student which has best sum avarega is {students[averages.IndexOf(averages.Max())].Name}");
+            Console.WriteLine($"Student which has best sum average is {students[averages.IndexOf(averages.Max())].Name}");
+        }
+        public void BestAverageClass(List<Student> students, string lessonName, int classgrade)
+        {
+            List<Student> students1 = new List<Student>();
+            foreach (Student student in students)
+            {
+                if (student.ClassGrade == classgrade)
+                    students1.Add(student);
+            }
+
+
+           
+            List<double> averages = new List<double>();
+            if (lessonName == "math")
+            {
+                for (int i = 0; i < students1.Count; i++)
+                {
+                    averages.Add(students1[i].grade.math.Average());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < students1.Count; i++)
+                {
+                    averages.Add(students1[i].grade.biology.Average());
+                }
+            }
+            Console.WriteLine($"Best student in {lessonName} in class {classgrade} is {students1[averages.IndexOf(averages.Max())].Name}");
+
         }
 
     }
