@@ -17,19 +17,20 @@ namespace ClassApplication
             var name = Console.ReadLine();
             Console.WriteLine("Please enter student surname");
             var surname = Console.ReadLine();
-            var grades1 = new List<int>();
+
+            var gradesMath = new List<int>();
             for (int i = 0; i < 7; i++)
             {
-                grades1.Add(rand.Next(1, 11));
+                gradesMath.Add(rand.Next(1, 11));
             }
-            var grades2 = new List<int>();
+            var gradesBiology = new List<int>();
             for (int i = 0; i < 7; i++)
             {
-                grades2.Add(rand.Next(1, 11));
+                gradesBiology.Add(rand.Next(1, 11));
             }
             var grades = new Grade();
-            grades.math = grades1;
-            grades.biology = grades2;
+            grades.Math = gradesMath;
+            grades.Biology = gradesBiology;
             var student = new Student(name, surname, grades);
             students.Add(student);
 
@@ -46,17 +47,15 @@ namespace ClassApplication
             try
             {
                 var stId = Convert.ToInt32(Console.ReadLine());
-
-                foreach (var student in students)
-                    if (student.Id == stId)
-                    {
-                        Console.WriteLine("Biologija");
-                        student.grade.biology.ForEach(i => Console.WriteLine(i));
-                        Console.WriteLine("Vidurkis: " + student.grade.biology.Average());
-                        Console.WriteLine("Matematika");
-                        student.grade.math.ForEach(i => Console.WriteLine(i));
-                        Console.WriteLine("Vidurkis: " + student.grade.math.Average());
-                    }
+                var student = students.FirstOrDefault(x => x.Id == stId);
+                {
+                    Console.WriteLine("Biologija");
+                    student.grade.Biology.ForEach(i => Console.WriteLine(i));
+                    Console.WriteLine("Vidurkis: " + student.grade.Biology.Average());
+                    Console.WriteLine("Matematika");
+                    student.grade.Math.ForEach(i => Console.WriteLine(i));
+                    Console.WriteLine("Vidurkis: " + student.grade.Math.Average());
+                }
             }
             catch (Exception ex)
             {
@@ -83,80 +82,60 @@ namespace ClassApplication
                 case "name":
                     Console.WriteLine("Please enter new name");
                     var newName = Console.ReadLine();
-                    foreach (var student in students)
-                        if (student.Id == upId)
-                        {
-                            student.Name = newName;
-                        }
+                    var studentN = students.FirstOrDefault(x => x.Id == upId);
+                    {
+                        studentN.Name = newName;
+                    }
                     break;
                 case "surname":
                     Console.WriteLine("Please enter new surname");
                     var newSurname = Console.ReadLine();
-                    foreach (var student in students)
-                        if (student.Id == upId)
-                        {
-                            student.Surname = newSurname;
-                        }
+                    var studentS = students.FirstOrDefault(x => x.Id == upId);
+
+                    {
+                        studentS.Surname = newSurname;
+                    }
                     break;
             }
 
         }
         public void BestAverage(List<Student> students, string lessonName)
         {
-            List<double> averages = new List<double>();
+            Student studentBest;
+
             if (lessonName == "math")
             {
-                for (int i = 0; i < students.Count; i++)
-                {
-                    averages.Add(students[i].grade.math.Average());
-                }
+                studentBest = students.OrderByDescending(x => x.grade.Math.Average()).First();
             }
             else
             {
-                for (int i = 0; i < students.Count; i++)
-                {
-                    averages.Add(students[i].grade.biology.Average());
-                }
+                studentBest = students.OrderByDescending(x => x.grade.Biology.Average()).First();
             }
-            Console.WriteLine($"Best student in {lessonName} is {students[averages.IndexOf(averages.Max())].Name}");
+            Console.WriteLine($"Best student in {lessonName} is {studentBest.Name}");
 
         }
         public void BestOfBest()
         {
-            List<double> averages = new List<double>();
-            for (int i = 0; i < students.Count; i++)
-            {
-                averages.Add(students[i].grade.math.Average() + students[i].grade.biology.Average());
-            }
-            Console.WriteLine($"Student which has best sum average is {students[averages.IndexOf(averages.Max())].Name}");
+            Student bestStudent = students.OrderByDescending(s => s.grade.Math.Average() + s.grade.Biology.Average()).First();
+            Console.WriteLine($"Student which has best sum average is {bestStudent.Name}");
         }
         public void BestAverageClass(List<Student> students, string lessonName, int classgrade)
         {
-            List<Student> students1 = new List<Student>();
-            foreach (Student student in students)
-            {
-                if (student.ClassGrade == classgrade)
-                    students1.Add(student);
-            }
+            List<Student> bestStudents = new List<Student>();
 
+            bestStudents.AddRange(students.Where(students => students.ClassGrade == classgrade));
 
-           
-            List<double> averages = new List<double>();
+            Student studentBest;
+
             if (lessonName == "math")
             {
-                for (int i = 0; i < students1.Count; i++)
-                {
-                    averages.Add(students1[i].grade.math.Average());
-                }
+                studentBest = bestStudents.OrderByDescending(x => x.grade.Math.Average()).First();
             }
             else
             {
-                for (int i = 0; i < students1.Count; i++)
-                {
-                    averages.Add(students1[i].grade.biology.Average());
-                }
+                studentBest = bestStudents.OrderByDescending(x => x.grade.Biology.Average()).First();
             }
-            Console.WriteLine($"Best student in {lessonName} in class {classgrade} is {students1[averages.IndexOf(averages.Max())].Name}");
+            Console.WriteLine($"Best student in {lessonName} is {studentBest.Name}");
 
         }
 

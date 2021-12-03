@@ -8,8 +8,8 @@ namespace ClassApplication
 {
     public class Grade
     {
-        public List<int> math { get; set; }
-        public List<int> biology { get; set; }
+        public List<int> Math { get; set; } //math is didziosios nes public
+        public List<int> Biology { get; set; }
 
 
     }
