@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     internal class Aligator : NPC
     {
-        public string Name = "Aligator";
+
         public void sinkEnemy()
         {
             Console.WriteLine("You drag enemy under water dealing -20 damage");

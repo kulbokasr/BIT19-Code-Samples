@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     internal class NPC  // : Object - visada nutylimai paveldi
     {
-        public string Name { get; set; } 
+        public string Name { get; set; } // speju tavo litas mato viska kaip npc. npc.. name yra tuscias nes pas triusi sukuri nauja neima. bandom.
         public int Level { get; set; } = 3;
         public int Hitpoints { get; set; }
         public int Strength { get; set; }
@@ -18,15 +18,15 @@ namespace ConsoleApp1
 
         public void Attack()
         {
-            var random = new Random();
-            var randomBool = random.Next(1,3) == 1;
+            Random random = new Random();
+            bool randomBool = random.Next(0,2) == 0;
             if (randomBool)
             { 
-                Console.WriteLine("You attacked" + Name + "and you won");
+                Console.WriteLine("You attacked " + Name + " and you won");
             }
             else
             { 
-                Console.WriteLine("You attacked" + Name + "and you won");
+                Console.WriteLine("You attacked " + Name + " and you lost");
             }
         }
 

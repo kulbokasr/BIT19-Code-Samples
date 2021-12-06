@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     internal class AngryRabbit : NPC
     {
-        public string Name = "AngryRabbit";
+
         public void UltraSonicKick()
         {
             Console.WriteLine("You kick enemy and deal -15 damage");

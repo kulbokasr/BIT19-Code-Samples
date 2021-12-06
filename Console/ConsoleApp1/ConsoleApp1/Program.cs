@@ -12,19 +12,19 @@ namespace ConsoleApp1
             Aligator a = new Aligator();
             Snake s = new Snake();
             AngryRabbit ar = new AngryRabbit();
+        
+            a.Name = "Aligator";
+            s.Name = "Snake";
+            ar.Name = "AngryRabbit";
 
             animals.Add(a);
             animals.Add(s);
             animals.Add(ar);
 
-            a.Name = "Aligator";
-            s.Name = "Snake";
-            ar.Name = "AngryRabbit";
-
+            Random rand = new Random(); //ustenka karta sukurti
 
             while (true)
             {
-                Random rand = new Random();
                 int rand1 = rand.Next(0, 3);
                 Console.WriteLine($"Do you want to attack {animals[rand1].Name} ? Reply Yes or No");
                 var command = Console.ReadLine().ToLower();
@@ -32,7 +32,7 @@ namespace ConsoleApp1
                 {
                     animals[rand1].Attack();
                 }
-                else break;
+ 
 
             }
         }

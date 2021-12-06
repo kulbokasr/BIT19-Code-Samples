@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     internal class Snake : NPC
     {
-        public string Name = "Snake";
+  
         public void BiteEnemy()
         {
             Console.WriteLine("You bit enemy dealing -30 damage");
