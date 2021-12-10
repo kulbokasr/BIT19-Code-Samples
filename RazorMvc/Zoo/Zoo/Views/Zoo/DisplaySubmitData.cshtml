@@ -1,0 +1,57 @@
+﻿@model ZooModel
+ 
+    @using (Html.BeginForm("SendSubmitData", "Zoo", FormMethod.Post))
+    {
+@*        <text>Name</text>@Html.DisplayFor(a => a.Name)
+        @Html.TextBoxFor(a => a.Name)
+        @Html.DisplayFor(a => a.Description)
+        @Html.TextBoxFor(a => a.Description)
+        @Html.DisplayFor(a => a.Age)
+        @Html.TextBoxFor(a => a.Age)
+        @Html.DisplayFor(a => a.Gender)
+        @Html.TextBoxFor(a => a.Gender)
+
+        <input type="submit" value="Submit"/>*@
+
+
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Animal details</th>
+            </tr>
+            <tr>
+                <td>Name: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Name)
+                </td>
+            </tr>
+            <tr>
+                <td>Description: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Description)
+                </td>
+            </tr>
+            <tr>
+                <td>Age: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Age)
+                </td>
+            </tr>
+            <tr>
+                <td>Gender: </td>
+                <td>
+                    @Html.DropDownListFor(m => m.Gender, new List<SelectListItem>
+                   { new SelectListItem{Text="Male", Value="M"},
+                     new SelectListItem{Text="Female", Value="F"}}, "Please select")
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit"/></td>
+            </tr>
+        </table>
+
+
+
+
+
+    }

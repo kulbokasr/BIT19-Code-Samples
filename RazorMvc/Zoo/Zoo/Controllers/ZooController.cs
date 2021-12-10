@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using Zoo.Models;
 using Zoo.Services;
 
 namespace Zoo.Controllers
@@ -20,6 +22,29 @@ namespace Zoo.Controllers
            var result = _zooService.ReadFromDB();
             return View("Zoo", result);
         }
+
+        public IActionResult DisplaySubmitData()
+        {
+            //var emptyModel = new ZooModel()
+            //{
+            //    Name = "Name",
+            //    Description = "Description",
+            //    Age = 4,
+            //    Gender = "Gender"
+            //};
+            return View(/*emptyModel*/);
+        }
+
+
+        // will receive filled model and will save to file
+        public  IActionResult SendSubmitData(ZooModel model)
+        {
+            _zooService.AddToDB(model);
+            return RedirectToAction("DisplaySubmitData");
+        }
+
+
+
 
         // GET: ZooController/Details/5
         public ActionResult Details(int id)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using Zoo.Models;
 
@@ -16,7 +17,7 @@ namespace Zoo.Services
             _connection = sqlConnection;
         }
 
-        public List<ZooModel> ReadFromDB()//cia grazini lisat
+        public List<ZooModel> ReadFromDB()//cia grazini lista
 
         {// tai tau reikia susikurti db objekta iri inicializuoti.
             _connection.Close();
@@ -29,16 +30,34 @@ namespace Zoo.Services
             while (reader.Read())
             {  
                 ZooModel animal = new ZooModel();
-                animal.Name = reader[0].ToString();
-                animal.Description = reader[1].ToString();
-                animal.Age = Convert.ToInt32(reader[2].ToString()); // KLAUSIMAS kodel man cia neina ToInt32 iskart naudoti?
-                animal.Gender = reader[3].ToString();
-
+                animal.Name = reader.GetString(0);
+                animal.Description = reader.GetString(1);
+                animal.Age = reader.GetInt32(2); 
+                animal.Gender = reader.GetString(3);
+        
                 animals.Add(animal);
             }
+
             _connection.Close();
+
             return animals;
         }
 
+        public void AddToDB(ZooModel model)
+        {
+            _connection.Close();
+            _connection.Open();
+            string sql = "insert into dbo.Zoo (Name, Description, Age, Gender) values(@first, @second, @third, @last)";
+            SqlCommand command = new SqlCommand(sql, _connection);
+            command.Parameters.Add("@first", SqlDbType.NVarChar).Value = model.Name;
+            command.Parameters.Add("@second", SqlDbType.NVarChar).Value = model.Description;
+            command.Parameters.Add("@third", SqlDbType.Int).Value = model.Age;
+            command.Parameters.Add("@last", SqlDbType.NVarChar).Value = model.Gender;
+
+            int rowsAdded = command.ExecuteNonQuery();
+
+            _connection.Close();
+        }
+        
     }
 }

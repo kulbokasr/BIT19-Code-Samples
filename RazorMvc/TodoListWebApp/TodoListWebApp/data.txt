@@ -2,3 +2,5 @@ grindu plovimas * isplauti grindis
 masinos valymas * isvalyti masina
 langu plovimas * isplauti langus
 vejos valymas * nupjauti veja
+Fill in task name - Fill in task description 
+Fill in task name - Fill in task description 
