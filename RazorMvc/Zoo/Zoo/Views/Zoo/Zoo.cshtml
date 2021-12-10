@@ -1,0 +1,8 @@
+﻿@model List<ZooModel>
+
+<ul> Gyvunu informacija:
+    @foreach(var zooModel in @Model)
+    {
+        <li>@zooModel.Name - @zooModel.Description - @zooModel.Age - @zooModel.Gender</li>
+    }
+</ul>

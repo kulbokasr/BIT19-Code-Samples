@@ -1,0 +1,9 @@
+﻿@model TasksListModel
+
+<ul> Uzduotys ir ju aprasymai:
+    @foreach(var taskModel in @Model.Tasks)
+    {
+        <li>@taskModel.Name - @taskModel.Description</li>
+        
+    }
+</ul>

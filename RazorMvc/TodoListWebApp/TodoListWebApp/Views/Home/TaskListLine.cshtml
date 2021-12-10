@@ -1,0 +1,9 @@
+﻿@model TaskListLineModel
+
+<ul> Uzduotys ir ju aprasymai:
+    @foreach(var taskModelList in @Model.Tasks)
+    {
+        <li>@taskModelList.NameAndDescription</li>
+        
+    }
+</ul>
