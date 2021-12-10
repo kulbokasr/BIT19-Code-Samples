@@ -30,10 +30,11 @@ namespace Zoo.Services
             while (reader.Read())
             {  
                 ZooModel animal = new ZooModel();
-                animal.Name = reader.GetString(0);
-                animal.Description = reader.GetString(1);
-                animal.Age = reader.GetInt32(2); 
-                animal.Gender = reader.GetString(3);
+                animal.Id = reader.GetInt32(0);
+                animal.Name = reader.GetString(1);
+                animal.Description = reader.GetString(2);
+                animal.Age = reader.GetInt32(3); 
+                animal.Gender = reader.GetString(4);
         
                 animals.Add(animal);
             }
@@ -47,8 +48,10 @@ namespace Zoo.Services
         {
             _connection.Close();
             _connection.Open();
-            string sql = "insert into dbo.Zoo (Name, Description, Age, Gender) values(@first, @second, @third, @last)";
+            string sql = "insert into dbo.Zoo (Id, Name, Description, Age, Gender) values(@Zero, @first, @second, @third, @last)";
             SqlCommand command = new SqlCommand(sql, _connection);
+            var mooodel = new ZooModel();
+            command.Parameters.Add("@Zero", SqlDbType.Int).Value = model.Id;
             command.Parameters.Add("@first", SqlDbType.NVarChar).Value = model.Name;
             command.Parameters.Add("@second", SqlDbType.NVarChar).Value = model.Description;
             command.Parameters.Add("@third", SqlDbType.Int).Value = model.Age;
