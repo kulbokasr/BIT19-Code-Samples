@@ -12,7 +12,7 @@ namespace Zoo.Controllers
 
         public ZooController(ZooService zooService) //konstruktorius priima sservice objekta ir priskiria tam kitnamajam kur auksciau sukurei
         {
-            _zooService = zooService; //TADA tu jį gali laisvai naudoti bet kuriam metode. pasilikau sau komentarus.k
+            _zooService = zooService; //TADA tu jį gali laisvai naudoti bet kuriam metode.
         }
         public ActionResult Index()
         {

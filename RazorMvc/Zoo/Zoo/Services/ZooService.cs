@@ -20,7 +20,7 @@ namespace Zoo.Services
 
         {// tai tau reikia susikurti db objekta iri inicializuoti.
             _connection.Close();
-            _connection.Open(); // BOOM. atidarėm connection. 
+            _connection.Open();  
 
             SqlCommand command = new SqlCommand("Select * from Zoo", _connection);// /* cia antras parametras yra DB objektas, kuris zino KAIP prisijungti prie duombazes*/
             
@@ -36,7 +36,7 @@ namespace Zoo.Services
 
                 animals.Add(animal);
             }
-            _connection.Close();// BOOM. uzda
+            _connection.Close();
             return animals;
         }
 
