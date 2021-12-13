@@ -23,7 +23,7 @@ namespace Zoo.Controllers
             return View("Zoo", result);
         }
 
-        public IActionResult DisplaySubmitData()
+        public ActionResult DisplaySubmitData()
         {
             //var emptyModel = new ZooModel()
             //{
@@ -37,13 +37,17 @@ namespace Zoo.Controllers
 
 
         // will receive filled model and will save to file
-        public  IActionResult SendSubmitData(ZooModel model)
+        public  ActionResult SendSubmitData(ZooModel model)
         {
             _zooService.AddToDB(model);
             return RedirectToAction("DisplaySubmitData");
         }
-
-
+        
+        public ActionResult Delete( int Id)
+        {
+            _zooService.DeleteAnimal(Id); 
+            return RedirectToAction("Index");
+        }
 
 
         // GET: ZooController/Details/5
@@ -72,44 +76,25 @@ namespace Zoo.Controllers
             }
         }
 
+
+
         // GET: ZooController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id) 
         {
-            return View();
+            var result = _zooService.ReadFromDBById(id);
+            return View("ZooEdit", result); 
         }
 
-        // POST: ZooController/Edit/5
+        // POST: ZooController/Edit/5  
         [HttpPost]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(ZooModel animal) 
+            
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _zooService.Edit(animal, animal.Id);
+            return RedirectToAction("Index");
+
         }
 
-        // GET: ZooController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: ZooController/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

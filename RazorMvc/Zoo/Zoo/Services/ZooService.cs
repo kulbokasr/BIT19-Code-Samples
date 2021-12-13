@@ -48,10 +48,8 @@ namespace Zoo.Services
         {
             _connection.Close();
             _connection.Open();
-            string sql = "insert into dbo.Zoo (Id, Name, Description, Age, Gender) values(@Zero, @first, @second, @third, @last)";
+            string sql = "insert into dbo.Zoo (Name, Description, Age, Gender) values(@first, @second, @third, @last)";
             SqlCommand command = new SqlCommand(sql, _connection);
-            var mooodel = new ZooModel();
-            command.Parameters.Add("@Zero", SqlDbType.Int).Value = model.Id;
             command.Parameters.Add("@first", SqlDbType.NVarChar).Value = model.Name;
             command.Parameters.Add("@second", SqlDbType.NVarChar).Value = model.Description;
             command.Parameters.Add("@third", SqlDbType.Int).Value = model.Age;
@@ -61,6 +59,57 @@ namespace Zoo.Services
 
             _connection.Close();
         }
-        
+
+        public void DeleteAnimal(int delId)
+        {
+            _connection.Open();
+            string sql = "DELETE FROM Zoo WHERE Id = @delId";
+            SqlCommand command = new SqlCommand(sql, _connection);
+            command.Parameters.AddWithValue("delId", delId);
+            command.CommandType = CommandType.Text;
+            command.ExecuteNonQuery();
+            _connection.Close();
+
+        }
+
+        public void Edit(ZooModel animal, int upId)
+        {
+            _connection.Open();
+            string sql = "UPDATE dbo.Zoo SET Name = @first, Description = @second, Age = @third, Gender = @last WHERE Id = @upId";
+            SqlCommand command = new SqlCommand(sql, _connection);
+            command.Parameters.AddWithValue("upId", upId);
+            command.CommandType = CommandType.Text;
+            command.Parameters.Add("@first", SqlDbType.NVarChar).Value = animal.Name;
+            command.Parameters.Add("@second", SqlDbType.NVarChar).Value = animal.Description;
+            command.Parameters.Add("@third", SqlDbType.Int).Value = animal.Age;
+            command.Parameters.Add("@last", SqlDbType.NVarChar).Value = animal.Gender;
+
+            int rowsAdded = command.ExecuteNonQuery();
+
+            _connection.Close();
+
+        }
+        public ZooModel ReadFromDBById(int editId)
+        {
+            _connection.Open();
+            SqlCommand command = new SqlCommand("Select * from Zoo where id = @editId", _connection);
+            command.Parameters.AddWithValue("editId", editId);
+            command.CommandType = CommandType.Text;
+            SqlDataReader reader = command.ExecuteReader();
+
+            ZooModel animal = new ZooModel();
+            while (reader.Read())
+            {               
+                animal.Id = reader.GetInt32(0);
+                animal.Name = reader.GetString(1);
+                animal.Description = reader.GetString(2);
+                animal.Age = reader.GetInt32(3);
+                animal.Gender = reader.GetString(4);               
+            }
+            _connection.Close();
+            return animal;
+
+        }
+
     }
 }

@@ -1,8 +1,20 @@
 ﻿@model List<ZooModel>
 
+
 <ul> Gyvunu informacija:
     @foreach(var zooModel in @Model)
     {
-        <li>@zooModel.Id - @zooModel.Name - @zooModel.Description - @zooModel.Age - @zooModel.Gender</li>
+        <li>@zooModel.Id - @zooModel.Name - @zooModel.Description - @zooModel.Age - @zooModel.Gender 
+
+            @using (Html.BeginForm("Delete", "Zoo", new { id = $"{zooModel.Id}" }, FormMethod.Post))
+                {
+                <input type="submit" value="Delete" />
+                }
+            @using (Html.BeginForm("Edit", "Zoo", new { id = $"{zooModel.Id}" }, FormMethod.Get))
+                {
+                <input type="submit" value="Edit" />
+                }
+            </li>
     }
 </ul>
+
