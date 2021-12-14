@@ -1,0 +1,21 @@
+﻿@model List<SponsorModel>
+
+
+<ul> Remeju informacija:
+    @foreach(var sponsorModel in @Model)
+    {
+        <li>Id: @sponsorModel.Id - Name: @sponsorModel.FirstName - Last name: @sponsorModel.LastName - Amount: @sponsorModel.Amount - Animal id: @sponsorModel.ZooId - Animal name:
+            @sponsorModel.Animal.Name
+           
+            @using (Html.BeginForm("Delete", "Sponsor", new { id = $"{sponsorModel.Id}" }, FormMethod.Post))
+                {
+                <input type="submit" value="Delete" />
+                }
+            @using (Html.BeginForm("Edit", "Sponsor", new { id = $"{sponsorModel.Id}" }, FormMethod.Get))
+                {
+                <input type="submit" value="Edit" />
+                }
+            </li>
+    }
+</ul>
+
