@@ -24,13 +24,15 @@ namespace Zoo.Services
         {
             _connection.Open();
 
-            SqlCommand command = new SqlCommand("Select dSponsors.*, Zoo.Name from Sponsors JOIN Zoo ON Sponsors.ZooId = Zoo.Id", _connection);
+            SqlCommand command = new SqlCommand("Select Sponsors.*, Zoo.Name from Sponsors JOIN Zoo ON Sponsors.ZooId = Zoo.Id", _connection);
 
             SqlDataReader reader = command.ExecuteReader();
 
             while (reader.Read())
             {
                 SponsorModel sponsor = new SponsorModel();
+                ZooModel animal = new ZooModel();
+                sponsor.Animal = animal;
                 sponsor.Id = reader.GetInt32(0);
                 sponsor.FirstName = reader.GetString(1);
                 sponsor.LastName = reader.GetString(2);
