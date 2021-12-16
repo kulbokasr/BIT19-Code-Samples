@@ -1,0 +1,11 @@
+﻿@model List<Item>
+
+<h3>Items</h3>
+
+<ul>
+@foreach(var @item in @Model)
+{
+    <li>@item.Id  @item.Name @item.Shop.Name</li>
+
+}
+</ul>
