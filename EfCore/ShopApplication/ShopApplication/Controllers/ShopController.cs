@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopApplication.Data;
 using ShopApplication.Models;
 using System.Collections.Generic;
@@ -17,12 +18,9 @@ namespace ShopApplication.Controllers
 
         public IActionResult Index()
         {
-            List<Item> items = new List<Item>();
-            items = _context.Items.ToList();
-            Shop shop = new Shop();
-            foreach (Item item in items) { item.Shop = shop; };
-            foreach (Item item in items) { item.Shop.Name = _context.Shops.Where(c => c.Id == item.ShopId)};
-            return View(items);
+            List<Shop> shops = new List<Shop>();
+            shops = _context.Shops.Include(c => c.Items).ToList();
+            return View(shops);
         }
 
     }

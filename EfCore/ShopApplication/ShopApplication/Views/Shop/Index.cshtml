@@ -1,11 +1,17 @@
-﻿@model List<Item>
+﻿@model List<Shop>
 
-<h3>Items</h3>
+<h3>Shops</h3>
 
 <ul>
-@foreach(var @item in @Model)
+@foreach(var @shop in @Model)
 {
-    <li>@item.Id  @item.Name @item.Shop.Name</li>
+    <li>@shop.Id  @shop.Name </li>
+        <ul>
+            @foreach(var @item in @shop.Items)
+            {
+                <li>@item.Name , @item.ShopId</li>
 
+            }
+        </ul>
 }
 </ul>
