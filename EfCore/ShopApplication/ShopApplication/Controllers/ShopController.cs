@@ -22,6 +22,43 @@ namespace ShopApplication.Controllers
             shops = _context.Shops.Include(c => c.Items).ToList();
             return View(shops);
         }
+        [HttpGet]
+        public IActionResult AddShop()
+        {
+            var shop = new Shop();
+            return View(shop);
+        }
+        [HttpPost]
+        public IActionResult AddShop(Shop shop)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(shop);
+            }
+            _context.Shops.Add(shop);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public  IActionResult DeleteShop(int id)
+        {
+            var shop = _context.Shops.Find(id);
+            _context.Shops.Remove(shop);
+            _context.SaveChanges(); 
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult UpdateShop(int id)
+        {
+            var shop = _context.Shops.Find(id);
+            return View(shop);
+        }
+        [HttpPost]
+        public IActionResult UpdateShop(Shop shop)
+        {
+            _context.Shops.Update(shop);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
     }
 }

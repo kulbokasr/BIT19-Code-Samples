@@ -5,11 +5,14 @@
 <ul>
 @foreach(var @shop in @Model)
 {
-    <li>@shop.Id  @shop.Name </li>
+    <li>Shop Id - @shop.Id, Shop name - @shop.Name
+    @Html.ActionLink("Delete Shop", "DeleteShop", "Shop", new{id = @shop.Id}, new { @class= "btn btn-danger" })
+    @Html.ActionLink("Update Shop", "UpdateShop", "Shop", new{id = @shop.Id}, new { @class= "btn btn-secondary" })
+    </li>
         <ul>
             @foreach(var @item in @shop.Items)
             {
-                <li>@item.Name , @item.ShopId</li>
+                <li>Item name - @item.Name , shop Id - @item.ShopId</li>
 
             }
         </ul>
