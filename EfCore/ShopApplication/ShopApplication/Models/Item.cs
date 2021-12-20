@@ -13,7 +13,10 @@ namespace ShopApplication.Models
         public Shop Shop { get; set; }
         public int ShopId { get; set; }
         public DateTime ExpirityDate { get; set; } = DateTime.UtcNow;
+        [Required]
+        bool IsDeleted { get; set; } = false;
         [NotMapped]
         public List<Shop> Shops { get; set; }
+        
     }
 }

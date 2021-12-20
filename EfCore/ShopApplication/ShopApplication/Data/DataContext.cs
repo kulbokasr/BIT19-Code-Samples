@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ShopApplication.Data
@@ -15,6 +16,39 @@ namespace ShopApplication.Data
         public DataContext(DbContextOptions<DataContext> options)
     : base(options)
         {
+        }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Shop>().Property<bool>("IsDeleted");
+            builder.Entity<Shop>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+        }
+
+
+
+        public override int SaveChanges()
+        {
+            UpdateSoftDeleteStatuses();
+            return base.SaveChanges();
+        }
+
+
+        private void UpdateSoftDeleteStatuses()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.CurrentValues["IsDeleted"] = false;
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.CurrentValues["IsDeleted"] = true;
+                        break;
+                }
+            }
         }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -69,7 +103,7 @@ namespace ShopApplication.Data
         //            ShopId = 2
         //        }
         //        );
-            
+
         //}
     }
 }
