@@ -1,0 +1,14 @@
+﻿@model Item
+
+@using (Html.BeginForm("AddItem", "Item", FormMethod.Post))
+{
+    @Html.LabelFor(a => a.Name)
+    @Html.TextBoxFor(a => a.Name)
+    @Html.ValidationMessageFor(a => a.Name,"",new{@class= "validation"})
+    <div>Select shop for Item</div>
+    //@Html.LabelFor(a => a.ShopId)
+    //@Html.TextBoxFor(a => a.ShopId)
+    @Html.DropDownListFor(a => a.ShopId, new SelectList(Model.Shops, "Id", "Name"), "", new { @class = "form-control" }) 
+     
+    <input type="submit" value="Submit"/>
+} 

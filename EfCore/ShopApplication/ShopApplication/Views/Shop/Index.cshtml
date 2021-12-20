@@ -12,8 +12,10 @@
         <ul>
             @foreach(var @item in @shop.Items)
             {
-                <li>Item name - @item.Name , shop Id - @item.ShopId</li>
-
+                <li>Item name - @item.Name , shop Id - @item.ShopId
+                @Html.ActionLink("Delete Item", "DeleteItem", "Item", new{id = @item.Id}, new { @class= "btn btn-danger" })
+                @Html.ActionLink("Update Item", "UpdateItem", "Item", new{id = @item.Id}, new { @class= "btn btn-secondary" })
+                </li>
             }
         </ul>
 }

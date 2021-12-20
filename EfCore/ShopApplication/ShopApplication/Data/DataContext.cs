@@ -17,59 +17,59 @@ namespace ShopApplication.Data
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
 
-            modelBuilder.Entity<Shop>().HasData(
-                new Shop()
-                {
-                    Id = 1,
-                    Name = "Shop1",
-                },
-                 new Shop()
-                 {
-                     Id = 2,
-                     Name = "Shop2"
-                 },
-                new Shop()
-                {
-                    Id = 3,
-                    Name = "Shop3"
-                }
-                );
-            modelBuilder.Entity<Item>().HasData(
-                new Item()
-                {
-                    Id = 1,
-                    Name = "Item1",
-                    ShopId = 1
-                },
-                 new Item()
-                 {
-                    Id = 2,
-                    Name = "Item2",
-                    ShopId = 1
-                 },
-                new Item()
-                {
-                    Id = 3,
-                    Name = "Item3",
-                    ShopId = 1
-                },
-                new Item()
-                {
-                    Id = 4,
-                    Name = "Item4",
-                    ShopId = 2
-                },
-                new Item()
-                {
-                    Id = 5,
-                    Name = "Item5",
-                    ShopId = 2
-                }
-                );
+        //    modelBuilder.Entity<Shop>().HasData(
+        //        new Shop()
+        //        {
+        //            Id = 1,
+        //            Name = "Shop1",
+        //        },
+        //         new Shop()
+        //         {
+        //             Id = 2,
+        //             Name = "Shop2"
+        //         },
+        //        new Shop()
+        //        {
+        //            Id = 3,
+        //            Name = "Shop3"
+        //        }
+        //        );
+        //    modelBuilder.Entity<Item>().HasData(
+        //        new Item()
+        //        {
+        //            Id = 1,
+        //            Name = "Item1",
+        //            ShopId = 1
+        //        },
+        //         new Item()
+        //         {
+        //            Id = 2,
+        //            Name = "Item2",
+        //            ShopId = 1
+        //         },
+        //        new Item()
+        //        {
+        //            Id = 3,
+        //            Name = "Item3",
+        //            ShopId = 1
+        //        },
+        //        new Item()
+        //        {
+        //            Id = 4,
+        //            Name = "Item4",
+        //            ShopId = 2
+        //        },
+        //        new Item()
+        //        {
+        //            Id = 5,
+        //            Name = "Item5",
+        //            ShopId = 2
+        //        }
+        //        );
             
-        }
+        //}
     }
 }

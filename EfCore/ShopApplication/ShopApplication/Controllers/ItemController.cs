@@ -15,20 +15,46 @@ namespace ShopApplication.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult AddItem()
         {
-            //item list atiduoda item controlleris. cia turi atiduoti parduotuves, ne itemus. jei labai nori galima:
-            //cia parduotuves paimi, ju sarasa ir jas atvaizduoji. kai paspausi ant jos, tada uzeisi i vidu. ir gausi sarasa is:
-            //ItemController, kuris uzkraus TOS KONKRECIOS parduotuves prekiu sarasa, ir atvaizduos.. item/Index.chtml
-            List<Item> items = new List<Item>();
-            items = _context.Items.ToList();
-            return View(items);
+            var item = new Item();
+            item.Shops = _context.Shops.ToList();
+            return View(item);
         }
-        public List<Item> GetItems()
+        [HttpPost]
+        public IActionResult AddItem(Item item)
         {
-            List<Item> items = new List<Item>();
-            items = _context.Items.ToList();
-            return items;
+            if (!ModelState.IsValid)
+            {
+                return View(item);
+            }
+            _context.Items.Add(item);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Shop");
         }
+
+        public IActionResult DeleteItem(int id)
+        {
+            var item = _context.Items.Find(id);
+            _context.Items.Remove(item);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Shop");
+        }
+
+        public IActionResult UpdateItem(int id)
+        {
+            var item = _context.Items.Find(id);
+            return View(item);
+        }
+        [HttpPost]
+        public IActionResult UpdateItem(Item item)
+        {
+            _context.Items.Update(item);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Shop");
+        }
+
+
     }
 }
