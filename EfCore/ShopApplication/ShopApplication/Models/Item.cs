@@ -17,6 +17,7 @@ namespace ShopApplication.Models
         bool IsDeleted { get; set; } = false;
         [NotMapped]
         public List<Shop> Shops { get; set; }
-        
+        public List<ItemTag> ItemTags { get; set; }
+
     }
 }

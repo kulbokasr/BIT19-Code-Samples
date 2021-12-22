@@ -19,7 +19,7 @@ namespace ShopApplication.Controllers
         public IActionResult Index()
         {
             List<Shop> shops = new List<Shop>();
-            shops = _context.Shops.Include(c => c.Items).ToList();
+            shops = _context.Shops.Include(c => c.Items).ThenInclude(c => c.ItemTags).ThenInclude(c => c.Tag).ToList();
             return View(shops);
         }
         [HttpGet]
