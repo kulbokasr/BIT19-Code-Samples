@@ -1,18 +1,4 @@
-﻿@*@model Item
-
-@using (Html.BeginForm("UpdateItem", "Item", FormMethod.Post))
-{
-    @Html.LabelFor(a => a.Name)
-    @Html.TextBoxFor(a => a.Name)
-
-    @Html.LabelFor(a => a.ShopId)
-    @Html.TextBoxFor(a => a.ShopId)
-
-        
-    <input type="submit" value="Submit"/>
-}*@
-
-@using ShopApplication.Dtos
+﻿@using ShopApplication.Dtos
 @model CreateItem
 
 @using (Html.BeginForm("UpdateItem", "Item", FormMethod.Post))
@@ -22,7 +8,9 @@
 
     @Html.LabelFor(a => a.Item.ShopId)
     @Html.DropDownListFor(a => a.Item.ShopId, new SelectList(Model.AllShops, "Id", "Name"), "", new { @class = "form-control" })
-    @Html.HiddenFor(m => m.Item.Id)
+
+    @Html.HiddenFor(m => m.Item.Id) // kodel man cia reikejo sitos eilutes, ir ka ji padare? kaip informacija suvaiksciojo?
+    
     @Html.LabelFor(a => a.Item.ItemTags)
     @Html.ListBoxFor(a => a.SelectedTagIds, new SelectList(@Model.Tags,"Id", "Name"))
     @Html.ValidationMessageFor(a => a.Item.ItemTags)
