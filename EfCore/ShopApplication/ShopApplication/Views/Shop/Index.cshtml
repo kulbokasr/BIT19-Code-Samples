@@ -23,6 +23,7 @@
                     {
                         <li>
                             @itemtag.Tag.Name
+                            @Html.ActionLink("Delete Tag", "DeleteItemTag", "Tag", new{tagId = @itemtag.TagId, itemId = @itemtag.ItemId}, new { @class= "btn btn-danger" })
                         </li>
                     }
                 </ul>

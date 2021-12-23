@@ -9,7 +9,7 @@
     @Html.LabelFor(a => a.Item.ShopId)
     @Html.DropDownListFor(a => a.Item.ShopId, new SelectList(Model.AllShops, "Id", "Name"), "", new { @class = "form-control" })
 
-    @Html.HiddenFor(m => m.Item.Id) // kodel man cia reikejo sitos eilutes, ir ka ji padare? kaip informacija suvaiksciojo?
+    @Html.HiddenFor(m => m.Item.Id) // kodel man cia reikejo sitos eilutes, ir ka ji padare? kaip informacija suvaiksciojo? - nes kitaip nesuvaiksto ID ir jis yra 0
     
     @Html.LabelFor(a => a.Item.ItemTags)
     @Html.ListBoxFor(a => a.SelectedTagIds, new SelectList(@Model.Tags,"Id", "Name"))
