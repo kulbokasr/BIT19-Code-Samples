@@ -39,8 +39,6 @@ namespace ShopApplication.Controllers
             _context.Items.Add(createItem.Item);
             _context.SaveChanges();
 
-            //Inserting tags
-
             foreach (var tagId in createItem.SelectedTagIds)
             {
                 _context.ItemTags.Add(new ItemTag()

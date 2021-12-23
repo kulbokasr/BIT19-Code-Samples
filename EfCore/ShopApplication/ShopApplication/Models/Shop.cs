@@ -9,7 +9,6 @@ namespace ShopApplication.Models
         [Required]
         public string Name { get; set; }
         public List<Item> Items { get; set; }
-        [Required]
-        bool IsDeleted { get; set; } = false;
+        public bool IsDeleted { get; set; }
     }
 }

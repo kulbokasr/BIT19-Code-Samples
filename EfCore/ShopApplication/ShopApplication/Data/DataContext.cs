@@ -24,37 +24,44 @@ namespace ShopApplication.Data
             builder.Entity<ItemTag>()
             .HasKey(bc => new { bc.TagId, bc.ItemId });
 
-            //base.OnModelCreating(builder);
+            base.OnModelCreating(builder);
 
-            //builder.Entity<Shop>().Property<bool>("IsDeleted");
-            //builder.Entity<Shop>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+            builder.Entity<Shop>().Property<bool>("IsDeleted");
+            builder.Entity<Shop>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+            builder.Entity<Item>().Property<bool>("IsDeleted");
+            builder.Entity<Item>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
+            builder.Entity<ItemTag>().Property<bool>("IsDeleted");
+            builder.Entity<ItemTag>().HasQueryFilter(m => EF.Property<bool>(m, "IsDeleted") == false);
         }
 
+        public override int SaveChanges()
+        {
+            UpdateSoftDeleteStatuses();
+            return base.SaveChanges();
+        }
 
-
-        //public override int SaveChanges()
+        //public override Task SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
         //{
         //    UpdateSoftDeleteStatuses();
-        //    return base.SaveChanges();
+        //    return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         //}
 
-
-        //private void UpdateSoftDeleteStatuses()
-        //{
-        //    foreach (var entry in ChangeTracker.Entries())
-        //    {
-        //        switch (entry.State)
-        //        {
-        //            case EntityState.Added:
-        //                entry.CurrentValues["IsDeleted"] = false;
-        //                break;
-        //            case EntityState.Deleted:
-        //                entry.State = EntityState.Modified;
-        //                entry.CurrentValues["IsDeleted"] = true;
-        //                break;
-        //        }
-        //    }
-        //}
+        private void UpdateSoftDeleteStatuses()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.CurrentValues["IsDeleted"] = false;
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.CurrentValues["IsDeleted"] = true;
+                        break;
+                }
+            }
+        }
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
