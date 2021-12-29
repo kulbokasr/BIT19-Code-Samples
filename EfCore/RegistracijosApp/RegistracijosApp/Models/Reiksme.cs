@@ -9,5 +9,6 @@ namespace RegistracijosApp.Models
     public class Reiksme : Entity
     {
         public Pozymis Pozymis { get; set; }
+        public int PozymisId { get; set; }
     }
 }
