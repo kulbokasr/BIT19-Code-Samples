@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RegistracijosApp.Data;
+using RegistracijosApp.Dtos;
 using RegistracijosApp.Models;
 using System;
 using System.Collections.Generic;
@@ -21,13 +22,48 @@ namespace RegistracijosApp.Controllers
 
         public IActionResult Index()
         {
-            List<Pozymis> pozymiai = new List<Pozymis>();
-            pozymiai = _context.Pozymiai/*.Include(c => c.Reiksmes)*/.ToList();
-            foreach (var pozymis in pozymiai)
+            var createPozymis = new CreatePozymis()
+            {
+                Pozymis = new Pozymis()
+                {
+                    Id = 0,
+                    Name = "",
+                    ReiksmeId = 0,
+                   
+                },
+                PozymisList = _context.Pozymiai.ToList(),
+                
+
+        };
+
+            //List<Pozymis> pozymiai = new List<Pozymis>();
+            //pozymiai = _context.Pozymiai.ToList();
+            //foreach (var pozymis in pozymiai)
+            //{
+            //    pozymis.Reiksmes = _context.Reiksmes.Where(a => a.PozymisId == pozymis.Id).ToList();
+            //}
+
+            foreach (var pozymis in createPozymis.PozymisList)
             {
                 pozymis.Reiksmes = _context.Reiksmes.Where(a => a.PozymisId == pozymis.Id).ToList();
             }
-            return View(pozymiai);
+
+            return View(createPozymis);
+        }
+
+        [HttpPost]
+        public IActionResult Index(CreatePozymis createPozymis)
+        {
+            List<Pozymis> pozymiai = new List<Pozymis>();
+            pozymiai = _context.Pozymiai.ToList();
+            for (int i = 0; i < pozymiai.Count; i++)
+            {
+                pozymiai[i].ReiksmeId = createPozymis.PozymisList[i].ReiksmeId;
+            }
+
+                _context.Pozymiai.UpdateRange(pozymiai);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
