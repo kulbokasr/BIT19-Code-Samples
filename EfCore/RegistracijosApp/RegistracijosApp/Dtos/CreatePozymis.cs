@@ -11,5 +11,6 @@ namespace RegistracijosApp.Dtos
     {
         public Pozymis Pozymis { get; set; }
         public List<Pozymis> PozymisList { get; set; }
+        public List<RegQandA> RegQandAList { get; set; }
     }
 }

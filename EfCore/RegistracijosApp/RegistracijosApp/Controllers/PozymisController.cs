@@ -32,9 +32,10 @@ namespace RegistracijosApp.Controllers
                    
                 },
                 PozymisList = _context.Pozymiai.ToList(),
-                
+                RegQandAList = _context.Registracijos.ToList(),
 
-        };
+
+            };
 
             //List<Pozymis> pozymiai = new List<Pozymis>();
             //pozymiai = _context.Pozymiai.ToList();

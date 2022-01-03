@@ -12,6 +12,7 @@ namespace RegistracijosApp.Data
     {
         public DbSet<Reiksme> Reiksmes { get; set; }
         public DbSet<Pozymis> Pozymiai { get; set; }
+        public DbSet<RegQandA> Registracijos { get; set; }
         public DataContext(DbContextOptions<DataContext> options)
 : base(options)
         {
