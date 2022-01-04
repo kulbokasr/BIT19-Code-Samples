@@ -1,6 +1,40 @@
 ﻿@using RegistracijosApp.Dtos
 @model CreatePozymis
 
+<script>
+    let initialValues = [];
+    let formSelects2;
+    window.onload = function () {
+        formSelects2 = document.querySelectorAll('select');
+        formSelects2.forEach(element => {
+            initialValues.push(element.value); /* kodėl šitos reikšmės matomos toggleSavingForm()*/ 
+        });
+      
+    }
+    function toggleSavingForm(){
+        var saveButton = document.getElementById('save');
+        var cancelButton = document.getElementById('cancel');
+        var editButton = document.getElementById('edit');
+        //let formSelects = document.querySelectorAll('select');
+        if (editButton.disabled === false){
+            saveButton.disabled = false;
+            cancelButton.disabled = false;
+            editButton.disabled = true;
+            formSelects2.forEach(element => element.disabled = false)
+        } else {
+            saveButton.disabled = true;
+            cancelButton.disabled = true;
+            editButton.disabled = false;
+            for (let i = 0; i < formSelects2.length; i++) {
+                formSelects2[i].value = initialValues[i];
+                formSelects2[i].disabled = true;
+            }
+        }
+        
+    }
+</script>
+
+
 @using (Html.BeginForm("Index", "Pozymis", FormMethod.Post))
 {
 
@@ -18,7 +52,7 @@
             <tr>
                 <td>@Model.PozymisList[i].Name</td>
                 <td>
-                     @Html.DropDownListFor(a => a.PozymisList[i].ReiksmeId, new SelectList(@Model.PozymisList[i].Reiksmes, "Id", "Name")) 
+                     @Html.DropDownListFor(a => a.PozymisList[i].ReiksmeId, new SelectList(@Model.PozymisList[i].Reiksmes, "Id", "Name"), "", new { @class = "form-control", disabled = "disabled" }) 
                       @Html.HiddenFor(m => m.PozymisList[i].Id)
                     
                 </td>
@@ -26,6 +60,9 @@
         }
     </tbody>
 </table>
-<input type="submit" value="Update" />
+@*<input type="submit" value="Update" />*@
+    <input type="button" class="btn btn-primary" id="edit" value="Koreguoti požymius" onclick="toggleSavingForm()" />
+    <input type="submit" class="btn btn-success" id="save" value="Saugoti pataisymus" disabled />
+    <input type="button" class="btn btn-secondary" id="cancel" value="Atšaukti pataisymus" onclick="toggleSavingForm()" disabled />
 
 }

@@ -62,7 +62,7 @@ namespace RegistracijosApp.Controllers
                 pozymiai[i].ReiksmeId = createPozymis.PozymisList[i].ReiksmeId;
             }
 
-                _context.Pozymiai.UpdateRange(pozymiai);
+            _context.Pozymiai.UpdateRange(pozymiai);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
