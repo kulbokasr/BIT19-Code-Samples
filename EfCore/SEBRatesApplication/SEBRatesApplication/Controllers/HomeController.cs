@@ -18,10 +18,10 @@ namespace SEBRatesApplication.Controllers
         {
             _logger = logger;
         }
-        [HttpPost]
         public IActionResult Index()
         {
-            return View();
+            DateEntered dateEntered = new DateEntered();
+            return View(dateEntered);
         }
 
         public IActionResult Calculations(string datestring)
@@ -32,6 +32,7 @@ namespace SEBRatesApplication.Controllers
             foreach (var item in exchangeRates)
             {
                 Rate rate = new Rate();
+                rate.DateChosen = datestring;
                 rate.Date = item.Element("date").Value;
                 rate.Currency = item.Element("currency").Value;
                 rate.Quantity = Int32.Parse(item.Element("quantity").Value);

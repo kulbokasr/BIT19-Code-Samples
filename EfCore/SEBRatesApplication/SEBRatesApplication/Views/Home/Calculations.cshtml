@@ -1,9 +1,11 @@
 ﻿@model List<Rate>
 
+
 <ul>
 @foreach (var @rate in @Model)
 {
     <li>
+        Date chosen @rate.DateChosen
         Currency code @rate.Currency
     </li>
 
