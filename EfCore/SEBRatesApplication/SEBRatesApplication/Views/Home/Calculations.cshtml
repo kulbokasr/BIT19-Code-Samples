@@ -1,0 +1,11 @@
+﻿@model List<Rate>
+
+<ul>
+@foreach (var @rate in @Model)
+{
+    <li>
+        Currency code @rate.Currency
+    </li>
+
+}
+</ul>
