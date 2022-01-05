@@ -18,12 +18,13 @@ namespace SEBRatesApplication.Controllers
         {
             _logger = logger;
         }
+
         public IActionResult Index()
         {
-            DateEntered dateEntered = new DateEntered();
-            return View(dateEntered);
+            Rate rate = new Rate();
+            return View(rate);
         }
-
+        
         public IActionResult Calculations(string datestring)
         {
             XElement xelement = XElement.Load("http://www.lb.lt/webservices/ExchangeRates/ExchangeRates.asmx/getExchangeRatesByDate?Date=20000105");
@@ -32,7 +33,7 @@ namespace SEBRatesApplication.Controllers
             foreach (var item in exchangeRates)
             {
                 Rate rate = new Rate();
-                rate.DateChosen = datestring;
+                //rate.DateChosen = datestring;
                 rate.Date = item.Element("date").Value;
                 rate.Currency = item.Element("currency").Value;
                 rate.Quantity = Int32.Parse(item.Element("quantity").Value);

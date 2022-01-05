@@ -1,7 +1,13 @@
-﻿@model DateEntered
+﻿@model Rate
 
 <h3>Choose date</h3>
 
 Please enter date in format YYYYMMDD
-@Html.TextBoxFor(a => a.DateForCalculation)
-@Html.ActionLink("Calculate", "Calculations", "Home", new{datestring = @Model.DateForCalculation}, new { @class= "btn btn-danger" })
+
+@using (Html.BeginForm("Calculations", "Home", FormMethod.Post))
+{
+
+
+@Html.TextBoxFor(a => a.DateChosen)
+    <input type="submit" value="Submit"/>
+} 
