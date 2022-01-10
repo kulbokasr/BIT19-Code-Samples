@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace CleanHotelWebApplication.Models
 {
-    public class Hotel
+    public class Hotel : Entity
     {
-        public int Id { get; set; }
         public string City { get; set; }
         public string Address { get; set; }
         public int Rooms { get; set; }

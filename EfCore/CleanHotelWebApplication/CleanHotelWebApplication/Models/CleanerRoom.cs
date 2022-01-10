@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CleanHotelWebApplication.Models
 {
-    public class Cleaner_Room
+    public class CleanerRoom
     {
-        public int Room_Id { get; set; }
-        public int Cleaner_Id { get; set; }
-        public bool Cleaned { get; set; }
+        public int CleanerId { get; set; }
+        public Cleaner Cleaner { get; set; }
+        public int RoomId { get; set; }
         public Room Room { get; set; }
-        public Cleaner Cleaner { get; set; }   
+        public bool Cleaned { get; set; }
     }
 }
