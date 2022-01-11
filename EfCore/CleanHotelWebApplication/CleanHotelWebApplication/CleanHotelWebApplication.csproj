@@ -19,4 +19,8 @@
     <Folder Include="Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Views\Cleaner\ListCleaners.cshtml" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,13 @@
+﻿@model List<Cleaner>
+
+<h3>Cleaners list</h3>
+
+<ul>
+    @foreach (var cleaner in @Model)
+    {
+        <li>
+            Cleaner Id - @cleaner.Id, name - @cleaner.Name, surname - @cleaner.SurName, City - @cleaner.City
+            @Html.ActionLink("Edit Cleaner", "EditCleaner", "Cleaner", new{id = @cleaner.Id}, new { @class= "btn btn-secondary" })
+        </li>
+    }
+</ul>
