@@ -67,5 +67,15 @@ namespace CleanHotelWebApplication.Controllers
 
             return View(hotelRoom);
         }
+        [HttpPost]
+        public IActionResult AssignCleaner(HotelRoom hotelRoom)
+        {
+            CleanerRoom cleanerRoom = new CleanerRoom();
+            cleanerRoom.RoomId = hotelRoom.Room.Id;
+            cleanerRoom.CleanerId = hotelRoom.Cleaner.Id;
+            _context.CleanersRooms.Add(cleanerRoom);
+            _context.SaveChanges();
+            return RedirectToAction("ListCleaners");
+        }
     }
 }
