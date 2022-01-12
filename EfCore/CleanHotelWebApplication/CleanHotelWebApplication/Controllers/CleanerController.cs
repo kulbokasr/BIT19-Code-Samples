@@ -21,8 +21,8 @@ namespace CleanHotelWebApplication.Controllers
         }
         public IActionResult ListCleaners()
         {
-            var rooms = _context.Cleaners.ToList();
-            return View(rooms);
+            var cleaners = _context.Cleaners.ToList();
+            return View(cleaners);
         }
 
         [HttpGet]
@@ -53,7 +53,6 @@ namespace CleanHotelWebApplication.Controllers
 
         public IActionResult AssignCleaner(int roomId)
         {
-            var room = _context.Rooms.Find(roomId);
             var hotelRoom = new HotelRoom()
             {
                 Hotels = _context.Hotels.Include(i => i.RoomsList).ToList(),
@@ -75,7 +74,7 @@ namespace CleanHotelWebApplication.Controllers
             cleanerRoom.CleanerId = hotelRoom.Cleaner.Id;
             _context.CleanersRooms.Add(cleanerRoom);
             _context.SaveChanges();
-            return RedirectToAction("ListCleaners");
+            return RedirectToAction("ListRooms", "Room");
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CleanHotelWebApplication.Data;
 using CleanHotelWebApplication.Dtos;
+using CleanHotelWebApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -74,6 +75,33 @@ namespace CleanHotelWebApplication.Controllers
         {
             var rooms = _context.Rooms.ToList();
             return View(rooms);
+        }
+
+        public IActionResult AssignRoom(int cleanerId)
+        {
+            var hotelRoom = new HotelRoom()
+            {
+                Hotels = _context.Hotels.Include(i => i.RoomsList).ToList(),
+                Rooms = _context.Rooms.Include(i => i.Hotel).ToList(),
+                Cleaner = _context.Cleaners.Find(cleanerId),
+                AllCleaners = _context.Cleaners.ToList(),
+                UsableCleaners = new List<Cleaner>(),
+                UsableRooms = new List<Room>() 
+            };
+            hotelRoom.Cleaner = _context.Cleaners.Where(i => i.Id == cleanerId).FirstOrDefault();
+            hotelRoom.UsableRooms.AddRange(_context.Rooms.Include(i => i.Hotel).Where(h => h.Hotel.City == hotelRoom.Cleaner.City).ToList());
+
+            return View(hotelRoom);
+        }
+        [HttpPost]
+        public IActionResult AssignRoom(HotelRoom hotelRoom)
+        {
+            CleanerRoom cleanerRoom = new CleanerRoom();
+            cleanerRoom.RoomId = hotelRoom.Room.Id;
+            cleanerRoom.CleanerId = hotelRoom.Cleaner.Id;
+            _context.CleanersRooms.Add(cleanerRoom);
+            _context.SaveChanges();
+            return RedirectToAction("ListCleaners", "Cleaner");
         }
 
     }
