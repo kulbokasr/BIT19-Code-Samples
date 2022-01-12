@@ -17,5 +17,6 @@ namespace CleanHotelWebApplication.Dtos
         public Cleaner Cleaner { get; set; }
         public List<Cleaner> AllCleaners { get; set; }
         public List<Cleaner> UsableCleaners { get; set; }
+
     }
 }

@@ -1,7 +1,7 @@
 ﻿@using CleanHotelWebApplication.Dtos
 @model HotelRoom
 
-@using (Html.BeginForm("AssignCleaner", "Cleaner", FormMethod.Post))
+@using (Html.BeginForm("AssignRoom", "Room", FormMethod.Post))
 {
     @Html.LabelFor(a => a.Cleaner.Id)
     @Html.TextBoxFor(a => a.Cleaner.Id, new { @readonly = true })

@@ -63,7 +63,14 @@ namespace CleanHotelWebApplication.Controllers
             };
             hotelRoom.Room = _context.Rooms.Where(i => i.Id == roomId).Include(i => i.Hotel).FirstOrDefault();
             hotelRoom.UsableCleaners.AddRange(_context.Cleaners.Where(c => c.City == hotelRoom.Room.Hotel.City).ToList());
-
+            foreach (var cleaner in hotelRoom.UsableCleaners.ToList())
+            {
+                int count = _context.CleanersRooms.Where(i => i.CleanerId == cleaner.Id & i.Cleaned == false).Count();
+                if (count >= 5)
+                {
+                    hotelRoom.UsableCleaners.Remove(cleaner);
+                }
+            }
             return View(hotelRoom);
         }
         [HttpPost]
