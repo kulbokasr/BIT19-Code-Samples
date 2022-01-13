@@ -83,5 +83,20 @@ namespace CleanHotelWebApplication.Controllers
             _context.SaveChanges();
             return RedirectToAction("ListRooms", "Room");
         }
+
+        public IActionResult CleanersRooms (int cleanerId)
+        {
+            List<CleanerRoom> items = new List<CleanerRoom>();
+            items = _context.CleanersRooms.Where(c => c.CleanerId == cleanerId & c.Cleaned !=true).Include(i => i.Room).ToList();
+            return View(items);
+        }
+        public IActionResult CleanRoom(int roomid, int cleanerid)
+        {
+            var item = _context.CleanersRooms.Find(cleanerid, roomid);
+            item.Cleaned = true;
+            _context.CleanersRooms.Update(item);
+            _context.SaveChanges();
+            return RedirectToAction("ListCleaners");
+        }
     }
 }
