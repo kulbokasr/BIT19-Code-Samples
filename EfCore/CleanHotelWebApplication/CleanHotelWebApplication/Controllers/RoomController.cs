@@ -25,9 +25,11 @@ namespace CleanHotelWebApplication.Controllers
             return RedirectToAction("Index", "Hotel");
             
         }
-       
-        public IActionResult AddRoom()
+
+        public IActionResult AddRoom(int? hotelid)
         {
+            if (hotelid == null)
+            { 
             var hotelRoom = new HotelRoom()
             {
                 Hotels = _context.Hotels.Where(h => h.Rooms > h.RoomsList.Count).Include(i => i.RoomsList).ToList(),
@@ -35,21 +37,21 @@ namespace CleanHotelWebApplication.Controllers
 
             };
             return View(hotelRoom);
-        }
-
-        public IActionResult AddRoom(int hotelid)
-        {
-            var hotelRoom = new HotelRoom()
+            }
+            else
             {
-                Hotels = _context.Hotels.Where(h => h.Rooms > h.RoomsList.Count).Include(i => i.RoomsList).ToList(),
-                Rooms = _context.Rooms.ToList()
+                var hotelRoom = new HotelRoom()
+                {
+                    Hotels = _context.Hotels.Where(h => h.Id == hotelid).ToList(),
+                    Rooms = _context.Rooms.ToList()
 
-            };
-            return View(hotelRoom);
+                };
+                return View(hotelRoom);
+            }
         }
 
 
-            [HttpPost]
+        [HttpPost]
         public IActionResult AddRoom(HotelRoom hotelRoom)
         {
             _context.Rooms.Add(hotelRoom.Room);
