@@ -14,7 +14,7 @@ namespace CleanHotelWebApplication.Models
         public int HotelId { get; set; }
         public bool Booked { get; set; }
         public Hotel Hotel { get; set; }
-        public List<Cleaner> Cleaners { get; }
-        public List<CleanerRoom> CleanerRooms { get; }
+        public List<Cleaner> Cleaners { get; set; }
+        public List<CleanerRoom> CleanerRooms { get; set; }
     }
 }

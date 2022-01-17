@@ -14,5 +14,6 @@ namespace CleanHotelWebApplication.Models
         public string SurName { get; set; }
         public string City { get; set; }
         public List<Room> Rooms { get; set; }
+        public List<CleanerRoom> CleanerRooms { get; set; }
     }
 }

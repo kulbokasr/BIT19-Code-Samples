@@ -25,7 +25,7 @@ namespace CleanHotelWebApplication.Controllers
             return RedirectToAction("Index", "Hotel");
             
         }
-        [HttpGet]
+       
         public IActionResult AddRoom()
         {
             var hotelRoom = new HotelRoom()
@@ -36,7 +36,20 @@ namespace CleanHotelWebApplication.Controllers
             };
             return View(hotelRoom);
         }
-        [HttpPost]
+
+        public IActionResult AddRoom(int hotelid)
+        {
+            var hotelRoom = new HotelRoom()
+            {
+                Hotels = _context.Hotels.Where(h => h.Rooms > h.RoomsList.Count).Include(i => i.RoomsList).ToList(),
+                Rooms = _context.Rooms.ToList()
+
+            };
+            return View(hotelRoom);
+        }
+
+
+            [HttpPost]
         public IActionResult AddRoom(HotelRoom hotelRoom)
         {
             _context.Rooms.Add(hotelRoom.Room);
@@ -76,14 +89,19 @@ namespace CleanHotelWebApplication.Controllers
 
         public IActionResult AssignRoom(int cleanerId)
         {
-            //var cleanerroomscount = _context.Cleaners.Include(i => i.Rooms).Where(i=> i.Id == cleanerId).FirstOrDefault();
-            //if ( cleanerroomscount.Rooms.Count >= 5)
-            //{
-            //    MessageBox.Show("Some text", "Some title",
-            //    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-
+            var cleanerroomscount = _context.Cleaners.Where(i => i.Id == cleanerId).Include(i => i.CleanerRooms).FirstOrDefault();
+            if (cleanerroomscount.CleanerRooms.Count >= 5)
+            {
+                var hotelRoom = new HotelRoom()
+                {
+                    errormsg = "Cleaner already has 5 rooms to clean"
+                };
+                return View("Error");
             
+            }
+
+            else
+            { 
             var hotelRoom = new HotelRoom()
             {
                 Hotels = _context.Hotels.Include(i => i.RoomsList).ToList(),
@@ -96,7 +114,7 @@ namespace CleanHotelWebApplication.Controllers
             hotelRoom.Cleaner = _context.Cleaners.Where(i => i.Id == cleanerId).FirstOrDefault();
             hotelRoom.UsableRooms.AddRange(_context.Rooms.Include(i => i.CleanerRooms).Where(i => i.Hotel.City == hotelRoom.Cleaner.City)./*Where(neisvalyti kambariai).*/Where(i => i.CleanerRooms.Count == 0).ToList());
             return View(hotelRoom);
-            
+            }
         }
         [HttpPost]
         public IActionResult AssignRoom(HotelRoom hotelRoom)

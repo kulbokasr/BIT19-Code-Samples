@@ -17,6 +17,7 @@
             <tr>
                 <td>
                     @Html.ActionLink("Edit hotel", "EditHotel", "Hotel", new{id = @hotel.Id}, new { @class= "btn btn-secondary" })
+                    @Html.ActionLink("Create room for this hotel", "AddRoom", "Room", new{hotelid = @hotel.Id}, new { @class= "btn btn-secondary" })
                     @hotel.Id, @hotel.City, @hotel.Address
                 </td>
                 <td>
