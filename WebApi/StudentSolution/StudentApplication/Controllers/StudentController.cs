@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentApplication.Data;
+using StudentApplication.Dtos;
 using StudentApplication.Models;
 using StudentApplication.Repositories;
 using System;
@@ -23,17 +24,31 @@ namespace StudentApplication.Controllers
         [HttpGet]
         public List<Student> GetAll()
         {
-            return _studentRepository.GetAll();
+            SchoolStudent schoolStudent = new SchoolStudent()
+            {
+                Students = _studentRepository.GetAll()
+            };
+             
+            return schoolStudent.Students;
         }
         [HttpGet("{id}")]
         public Student GetById(int id)
         {
-            return _studentRepository.GetById(id);
+            SchoolStudent schoolStudent = new SchoolStudent()
+            {
+                Student = _studentRepository.GetById(id)
+            };
+
+            return schoolStudent.Student;
         }
         [HttpPost]
         public string Create(Student student)
         {
-            _studentRepository.Create(student);
+            SchoolStudent schoolStudent = new SchoolStudent()
+            {
+                Student = student
+            };
+            _studentRepository.Create(schoolStudent.Student);
             return "Student created";
         }
         [HttpPut("{id}")]
