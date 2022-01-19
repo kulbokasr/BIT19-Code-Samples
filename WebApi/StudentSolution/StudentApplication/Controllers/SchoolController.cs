@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentApplication.Data;
+using StudentApplication.Dtos;
 using StudentApplication.Models;
 using StudentApplication.Repositories;
 using System;
@@ -25,10 +26,40 @@ namespace StudentApplication.Controllers
         }
 
         [HttpGet]
-        public List<School> GetAll()
+        public List<FakeSchool> GetAll()
         {
+            var schools = _dataContext.Schools.ToList();
+            
+            List<FakeSchool> fakeSchools = new List<FakeSchool>();
+            foreach (var school in schools)
+            {
+                FakeSchool fakeSchool = new FakeSchool()
+                { 
+                    Students = new List<FakeStudent>()
+                };
+                fakeSchool.Name = school.Name;
+                fakeSchool.Id = school.Id;
+                fakeSchool.Created = school.Created;
+                
+                List<FakeStudent> fakeStudents = new List<FakeStudent>();
+                var students = _dataContext.Students.Where(i => i.SchoolId == school.Id).ToList();
+                foreach (var student in students)
+                {
+                    FakeStudent fakeStudent = new FakeStudent();
+                    fakeStudent.SchoolId = student.SchoolId;
+                    fakeStudent.Name = student.Name;
+                    fakeStudent.Sex = student.Sex;
+                    fakeStudent.Id = student.Id;
+                    fakeSchool.Students.Add(fakeStudent);
+                }
+                fakeSchools.Add(fakeSchool);
+            }
+            //var schoolStudent = new SchoolStudent()
+            //{
+            //    Schools = _dataContext.Schools.Include(i => i.Students).ToList()
+            //};
             //return _schoolRepository.GetAll();
-            return _dataContext.Schools.Include(i => i.Students).ToList();
+            return fakeSchools;
         }
         [HttpGet("{id}")]
         public School GetById(int id)
