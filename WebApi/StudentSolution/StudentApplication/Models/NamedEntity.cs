@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace StudentApplication.Models
 {
-    public class Student : NamedEntity
+    public class NamedEntity
     {
-        public string Sex { get; set; }
-        public int SchoolId { get; set; }
-        public School School { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

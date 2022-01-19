@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StudentApplication.Data;
 using StudentApplication.Models;
+using StudentApplication.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,45 +14,43 @@ namespace StudentApplication.Controllers
     [Route("[controller]")]
     public class StudentController : ControllerBase
     {
-        private DataContext _dataContext;
-
-        public StudentController(DataContext dataContext)
+        private StudentRepository _studentRepository;
+        public StudentController(StudentRepository studentRepository)
         {
-            _dataContext = dataContext;
+            _studentRepository = studentRepository;
         }
 
         [HttpGet]
         public List<Student> GetAll()
         {
-            return _dataContext.Students.ToList();
+            return _studentRepository.GetAll();
+        }
+        [HttpGet("{id}")]
+        public Student GetById(int id)
+        {
+            return _studentRepository.GetById(id);
         }
         [HttpPost]
         public string Create(Student student)
         {
-            _dataContext.Students.Add(student);
-            _dataContext.SaveChanges();
+            _studentRepository.Create(student);
             return "Student created";
         }
         [HttpPut("{id}")]
         public string Update([FromRoute] int id, [FromBody] Student studentUpdate)
         {
-            var student = _dataContext.Students.Find(id);
+            var student = _studentRepository.GetById(id);
             student.Name = studentUpdate.Name;
             student.Sex = studentUpdate.Sex;
             student.SchoolId = studentUpdate.SchoolId; 
-            _dataContext.SaveChanges();
-            return "Student name updated";
+            _studentRepository.Update(student);
+            return "Student name, sex and school id updated";
         }
         [HttpDelete("{id}")]
         public string Delete(int id)
         {
-            _dataContext.Students.Remove(_dataContext.Students.Find(id));
-            _dataContext.SaveChanges();
+            _studentRepository.Delete(id);
             return "Student deleted";
         }
-    }
-}
-{
-
     }
 }
