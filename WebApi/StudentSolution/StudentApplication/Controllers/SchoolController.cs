@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace StudentApplication.Controllers
 {
-    [ApiController]
+    //[ApiController]
     [Route("[controller]")]
     public class SchoolController : ControllerBase
     {
@@ -72,7 +72,7 @@ namespace StudentApplication.Controllers
         public IActionResult Create(School school)
         {
             ModelState.Clear();
-            if (ModelState.IsValid)
+            if (TryValidateModel(school))
             {
                 _schoolRepository.Create(school);
                 return new ObjectResult("School created") { StatusCode = StatusCodes.Status201Created };  
