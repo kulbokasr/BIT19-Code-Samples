@@ -12,7 +12,7 @@ using StudentApplication.Data;
 namespace StudentApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220118192207_init")]
+    [Migration("20220120173439_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,22 @@ namespace StudentApplication.Migrations
                     b.ToTable("Schools");
                 });
 
+            modelBuilder.Entity("StudentApplication.Models.Sex", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Sexes");
+                });
+
             modelBuilder.Entity("StudentApplication.Models.Student", b =>
                 {
                     b.Property<int>("Id")
@@ -57,12 +73,14 @@ namespace StudentApplication.Migrations
                     b.Property<int>("SchoolId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Sex")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("SexId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("SchoolId");
+
+                    b.HasIndex("SexId");
 
                     b.ToTable("Students");
                 });
@@ -75,7 +93,15 @@ namespace StudentApplication.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudentApplication.Models.Sex", "Sex")
+                        .WithMany()
+                        .HasForeignKey("SexId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("School");
+
+                    b.Navigation("Sex");
                 });
 
             modelBuilder.Entity("StudentApplication.Models.School", b =>

@@ -22,24 +22,32 @@ namespace StudentApplication.Controllers
         }
 
         [HttpGet]
-        public List<Student> GetAll()
+        public IActionResult GetAll()
         {
             SchoolStudent schoolStudent = new SchoolStudent()
             {
                 Students = _studentRepository.GetAll()
             };
              
-            return schoolStudent.Students;
+            return BadRequest(schoolStudent.Students);
         }
         [HttpGet("{id}")]
-        public Student GetById(int id)
+        public IActionResult GetById(int id)
         {
+            Student student = _studentRepository.GetById(id);
+            if (student != null)
+            {
             SchoolStudent schoolStudent = new SchoolStudent()
             {
                 Student = _studentRepository.GetById(id)
             };
 
-            return schoolStudent.Student;
+            return Ok(schoolStudent.Student);
+            }
+            else
+            {
+                return NotFound("Id not found");
+            }
         }
         [HttpPost]
         public string Create(Student student)

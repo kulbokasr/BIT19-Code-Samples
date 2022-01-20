@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StudentApplication.Data;
 using StudentApplication.Dtos;
@@ -7,6 +8,7 @@ using StudentApplication.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,7 +50,7 @@ namespace StudentApplication.Controllers
                     FakeStudent fakeStudent = new FakeStudent();
                     fakeStudent.SchoolId = student.SchoolId;
                     fakeStudent.Name = student.Name;
-                    fakeStudent.Sex = student.Sex;
+                    fakeStudent.Sex = "fix this if you want";
                     fakeStudent.Id = student.Id;
                     fakeSchool.Students.Add(fakeStudent);
                 }
@@ -67,11 +69,21 @@ namespace StudentApplication.Controllers
             return _schoolRepository.GetById(id);
         }
         [HttpPost]
-        public string Create(School school)
+        public IActionResult Create(School school)
         {
-            _schoolRepository.Create(school);
-            return "School created";
+            ModelState.Clear();
+            if (ModelState.IsValid)
+            {
+                _schoolRepository.Create(school);
+                return new ObjectResult("School created") { StatusCode = StatusCodes.Status201Created };  
+            }
+            else
+            {
+                return new ObjectResult("Wrong input") { StatusCode = StatusCodes.Status422UnprocessableEntity };
+            }
         }
+
+
         [HttpPut("{id}")]
         public string Update([FromRoute] int id, [FromBody] School schoolUpdate)
         {
