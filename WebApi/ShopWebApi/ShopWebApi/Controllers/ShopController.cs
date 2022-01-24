@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopWebApi.Dtos;
 using ShopWebApi.Services;
+using ShopWebApi.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentValidation.Results;
 
 namespace ShopWebApi.Controllers
 {
@@ -38,9 +40,11 @@ namespace ShopWebApi.Controllers
         [HttpPost]
         public IActionResult Create(CreateShop createShop)
         {
-            if (!ModelState.IsValid)
+            ShopValidator validator = new ShopValidator();
+            ValidationResult results = validator.Validate(createShop);
+            if (!results.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(results.ToString("-"));
             }
             try
             {

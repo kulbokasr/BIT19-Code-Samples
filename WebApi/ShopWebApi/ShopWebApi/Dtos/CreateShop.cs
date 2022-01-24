@@ -9,7 +9,7 @@ namespace ShopWebApi.Dtos
 {
     public class CreateShop
     {
-        [Required] [MinLength(4)]
+        //[Required] [MinLength(4)]
         public string Name { get; set; }
     }
 }
