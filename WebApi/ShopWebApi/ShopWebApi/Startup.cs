@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +10,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ShopWebApi.Data;
+using ShopWebApi.Dtos;
+using ShopWebApi.Models;
+using ShopWebApi.Repositories;
 using ShopWebApi.Services;
 using System;
 using System.Collections.Generic;
@@ -33,6 +37,16 @@ namespace ShopWebApi
             services.AddDbContext<DataContext>(d => d.UseSqlServer(defaultConnection));
             services.AddTransient<ItemService>();
             services.AddTransient<ShopService>();
+            services.AddTransient<ShopRepository>();
+            services.AddTransient<ItemRepository>();
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CreateItem, Item>();
+                cfg.CreateMap<CreateShop, Shop>();
+            });
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+            services.AddMvc();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

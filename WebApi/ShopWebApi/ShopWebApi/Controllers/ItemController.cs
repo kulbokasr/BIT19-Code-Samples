@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.Results;
+using Microsoft.AspNetCore.Mvc;
 using ShopWebApi.Dtos;
 using ShopWebApi.Services;
+using ShopWebApi.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +40,11 @@ namespace ShopWebApi.Controllers
         [HttpPost]
         public IActionResult Create(CreateItem createItem)
         {
-            if (!ModelState.IsValid)
+            ItemValidator validator = new ItemValidator();
+            ValidationResult results = validator.Validate(createItem);
+            if (!results.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(results.ToString("-"));
             }
             try
             {
@@ -55,9 +59,11 @@ namespace ShopWebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, UpdateItem updateItem)
         {
-            if (!ModelState.IsValid)
+            UpdateItemValidator validator = new UpdateItemValidator();
+            ValidationResult results = validator.Validate(updateItem);
+            if (!results.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(results.ToString("-"));
             }
             try
             {

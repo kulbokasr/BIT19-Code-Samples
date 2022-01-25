@@ -9,8 +9,6 @@ namespace ShopWebApi.Dtos
 {
     public class UpdateShop
     {
-        [Required]
-        [MinLength(4)]
         public string Name { get; set; }
     }
 }

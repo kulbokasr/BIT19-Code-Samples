@@ -1,6 +1,8 @@
-﻿using ShopWebApi.Data;
+﻿using AutoMapper;
+using ShopWebApi.Data;
 using ShopWebApi.Dtos;
 using ShopWebApi.Models;
+using ShopWebApi.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +14,23 @@ namespace ShopWebApi.Services
     public class ItemService 
     {
         private readonly DataContext _dataContext;
+        private ItemRepository _itemRepository;
+        private readonly IMapper _mapper;
 
-        public ItemService(DataContext dataContext)
+        public ItemService(DataContext dataContext, ItemRepository itemRepository, IMapper mapper)
         {
             _dataContext = dataContext;
+            _itemRepository = itemRepository;
+            _mapper = mapper;
         }
         public List<Item> GetAll()
         {
-            List<Item> items = _dataContext.Items.ToList();
+            List<Item> items = _itemRepository.GetAll();
             return items;
         }
         public Item GetById(int id)
         {
-            Item item = _dataContext.Items.Find(id);
+            Item item = _itemRepository.GetById(id);
             if (item == null)
             {
                 throw new ArgumentException("Item with such Id does not exist");
@@ -44,12 +50,8 @@ namespace ShopWebApi.Services
             {
                 throw new ArgumentException("Cannot assign to this shop as it does not exist");
             }
-            var model = new Item()
-            {
-                Name = createItem.Name,
-                ShopId = createItem.ShopId,
-                Price = createItem.Price
-            };
+            var model = new Item();
+            model = _mapper.Map<Item>(createItem);
             _dataContext.Items.Add(model);
             _dataContext.SaveChanges();
             return model.Id;

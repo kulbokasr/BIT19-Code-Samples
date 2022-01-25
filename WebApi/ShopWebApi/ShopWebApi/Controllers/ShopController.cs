@@ -59,9 +59,11 @@ namespace ShopWebApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, UpdateShop updateShop)
         {
-            if (!ModelState.IsValid)
+            UpdateShopValidator validator = new UpdateShopValidator();
+            ValidationResult results = validator.Validate(updateShop);
+            if (!results.IsValid)
             {
-                return BadRequest(ModelState);
+                return BadRequest(results.ToString("-"));
             }
             try
             {

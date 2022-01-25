@@ -1,7 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ShopWebApi.Data;
 using ShopWebApi.Dtos;
 using ShopWebApi.Models;
+using ShopWebApi.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +15,14 @@ namespace ShopWebApi.Services
     public class ShopService
     {
         private readonly DataContext _dataContext;
+        private ShopRepository _shopRepository;
+        private readonly IMapper _mapper;
 
-        public ShopService(DataContext dataContext)
+        public ShopService(DataContext dataContext, ShopRepository shopRepository, IMapper mapper)
         {
             _dataContext = dataContext;
+            _shopRepository = shopRepository;
+            _mapper = mapper;
         }
         public List<Shop> GetAll()
         {
@@ -45,10 +51,8 @@ namespace ShopWebApi.Services
             {
                 throw new ArgumentException("Shop with such name already exists");
             }
-            var model = new Shop()
-            {
-                Name = createShop.Name
-            };
+            var model = new Shop();
+            model = _mapper.Map<Shop>(createShop);
             _dataContext.Shops.Add(model);
             _dataContext.SaveChanges();
             return model.Id;

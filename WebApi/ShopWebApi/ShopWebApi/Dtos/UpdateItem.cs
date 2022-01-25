@@ -9,7 +9,6 @@ namespace ShopWebApi.Dtos
 {
     public class UpdateItem
     {
-        [Required] [Range(0.01, Double.PositiveInfinity)]
         public double Price { get; set; }
         public int ShopId { get; set; }
         public string Name { get; set; }
