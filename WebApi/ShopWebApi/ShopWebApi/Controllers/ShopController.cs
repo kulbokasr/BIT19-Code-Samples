@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation.Results;
+using ShopWebApi.Exeptions;
 
 namespace ShopWebApi.Controllers
 {
@@ -32,7 +33,7 @@ namespace ShopWebApi.Controllers
             {
                 return Ok(_shopService.GetById(id));
             }
-            catch (ArgumentException ex)
+            catch (IdException ex)
             {
                 return NotFound(ex.Message);
             }

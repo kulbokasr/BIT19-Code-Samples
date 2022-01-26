@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ShopWebApi.Data;
 using ShopWebApi.Dtos;
+using ShopWebApi.Exeptions;
 using ShopWebApi.Models;
 using ShopWebApi.Repositories;
 using System;
@@ -34,7 +35,7 @@ namespace ShopWebApi.Services
             var shop = _dataContext.Shops.Include("Items").Where(i=> i.Id == id).FirstOrDefault();
             if (shop == null)
             {
-                throw new ArgumentException("Shop with such Id does not exist");
+                throw new IdException(id);
             }
             return shop;
         }

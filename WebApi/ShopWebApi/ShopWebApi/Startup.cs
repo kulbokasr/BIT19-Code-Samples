@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using ShopWebApi.Data;
 using ShopWebApi.Dtos;
+using ShopWebApi.Exeptions;
 using ShopWebApi.Models;
 using ShopWebApi.Repositories;
 using ShopWebApi.Services;
@@ -39,6 +40,7 @@ namespace ShopWebApi
             services.AddTransient<ShopService>();
             services.AddTransient<ShopRepository>();
             services.AddTransient<ItemRepository>();
+            services.AddTransient<IdException>();
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CreateItem, Item>();
