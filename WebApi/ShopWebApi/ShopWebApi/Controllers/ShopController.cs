@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation.Results;
 using ShopWebApi.Exeptions;
+using FluentValidation;
 
 namespace ShopWebApi.Controllers
 {
@@ -41,18 +42,16 @@ namespace ShopWebApi.Controllers
         [HttpPost]
         public IActionResult Create(CreateShop createShop)
         {
-            ShopValidator validator = new ShopValidator();
-            ValidationResult results = validator.Validate(createShop);
-            if (!results.IsValid)
-            {
-                return BadRequest(results.ToString("-"));
-            }
             try
             {
                 int createdShopId = _shopService.Create(createShop);
                 return Created("", createdShopId);
             }
             catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }

@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using ShopWebApi.Data;
 using ShopWebApi.Dtos;
 using ShopWebApi.Exeptions;
 using ShopWebApi.Models;
 using ShopWebApi.Repositories;
+using ShopWebApi.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +54,8 @@ namespace ShopWebApi.Services
             {
                 throw new ArgumentException("Shop with such name already exists");
             }
+            ShopValidator validator = new ShopValidator();
+            validator.ValidateAndThrow(createShop);
             var model = new Shop();
             model = _mapper.Map<Shop>(createShop);
             _dataContext.Shops.Add(model);

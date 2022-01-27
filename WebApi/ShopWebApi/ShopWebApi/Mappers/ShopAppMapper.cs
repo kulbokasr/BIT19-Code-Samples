@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace ShopWebApi.Mappers
 {
-    public class ShopMapper //: MapperConfiguration
+    public class ShopAppMapper : Profile
     {
-        //public ShopMapper()
-        //{
-        //    var config = new MapperConfiguration(cfg => cfg.CreateMap<Shop, CreateShop>());
-        //}
+        public ShopAppMapper()
+        {
+            CreateMap<CreateShop, Shop>();
+            CreateMap<CreateItem, Item>();
+        }
     }
 }

@@ -9,11 +9,8 @@ namespace ShopWebApi.Exeptions
     [Serializable]
     public class IdException : Exception
     {
-        public IdException()
-        { }
-
         public IdException(int id)
-            : base(String.Format("Invalid Id entered: {0}", id))
+            : base(String.Format("Entered Id does not exsist. You entered: {0}", id))
         { }
 
     }
