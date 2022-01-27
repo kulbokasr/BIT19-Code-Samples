@@ -73,6 +73,10 @@ namespace ShopWebApi.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (IdException ex)
+            {
+                return NotFound(ex.Message);
+            }
             return Ok("Shop Updated");
         }
         [HttpDelete("{id}")]
@@ -83,9 +87,9 @@ namespace ShopWebApi.Controllers
                 _shopService.Remove(id);
                 return Ok("Shop deleted");
             }
-            catch (ArgumentException ex)
+            catch (IdException ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
     }
