@@ -21,16 +21,16 @@ namespace ShopWebApi.Controllers
             _itemService = itemService;
         }
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(_itemService.GetAll());
+            return Ok(await _itemService.GetAllAsync());
         }
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                return Ok(_itemService.GetById(id));
+                return Ok(await _itemService.GetByIdAsync(id));
             }
             catch (ArgumentException ex)
             {
@@ -38,7 +38,7 @@ namespace ShopWebApi.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Create(CreateItem createItem)
+        public async Task<IActionResult> Create(CreateItem createItem)
         {
             ItemValidator validator = new ItemValidator();
             ValidationResult results = validator.Validate(createItem);
@@ -48,7 +48,7 @@ namespace ShopWebApi.Controllers
             }
             try
             {
-                int createdItemId = _itemService.Create(createItem);
+                int createdItemId = await _itemService.CreateAsync(createItem);
                 return Created("", createdItemId);
             }
             catch (ArgumentException ex)
@@ -57,7 +57,7 @@ namespace ShopWebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateItem updateItem)
+        public async Task<IActionResult> Update(int id, UpdateItem updateItem)
         {
             UpdateItemValidator validator = new UpdateItemValidator();
             ValidationResult results = validator.Validate(updateItem);
@@ -67,7 +67,7 @@ namespace ShopWebApi.Controllers
             }
             try
             {
-                _itemService.Update(id, updateItem);
+                await _itemService.UpdateAsync(id, updateItem);
             }
             catch (ArgumentException ex)
             {
@@ -76,11 +76,11 @@ namespace ShopWebApi.Controllers
             return Ok("Item Updated");
         }
         [HttpDelete("{id}")]
-        public IActionResult Remove(int id)
+        public async Task<IActionResult> Remove(int id)
         {
             try
             {
-                _itemService.Remove(id);
+                await _itemService.RemoveAsync(id);
                 return Ok("Item deleted");
             }
             catch (ArgumentException ex)

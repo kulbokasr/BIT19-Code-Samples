@@ -23,16 +23,16 @@ namespace ShopWebApi.Controllers
             _shopService = shopService;
         }
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(_shopService.GetAll());
+            return Ok(await _shopService.GetAllAsync());
         }
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
             try
             {
-                return Ok(_shopService.GetById(id));
+                return Ok(await _shopService.GetByIdAsync(id));
             }
             catch (IdException ex)
             {
@@ -40,11 +40,11 @@ namespace ShopWebApi.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Create(CreateShop createShop)
+        public async Task<IActionResult> Create(CreateShop createShop)
         {
             try
             {
-                int createdShopId = _shopService.Create(createShop);
+                int createdShopId = await _shopService.CreateAsync(createShop);
                 return Created("", createdShopId);
             }
             catch (ArgumentException ex)
@@ -57,7 +57,7 @@ namespace ShopWebApi.Controllers
             }
         }
         [HttpPut("{id}")]
-        public IActionResult Update(int id, UpdateShop updateShop)
+        public async Task<IActionResult> Update(int id, UpdateShop updateShop)
         {
             UpdateShopValidator validator = new UpdateShopValidator();
             ValidationResult results = validator.Validate(updateShop);
@@ -67,7 +67,7 @@ namespace ShopWebApi.Controllers
             }
             try
             {
-                _shopService.Update(id, updateShop);
+                await _shopService.UpdateAsync(id, updateShop);
             }
             catch (ArgumentException ex)
             {
@@ -80,11 +80,11 @@ namespace ShopWebApi.Controllers
             return Ok("Shop Updated");
         }
         [HttpDelete("{id}")]
-        public IActionResult Remove(int id)
+        public async Task<IActionResult> Remove(int id)
         {
             try
             {
-                _shopService.Remove(id);
+                await _shopService.RemoveAsync(id);
                 return Ok("Shop deleted");
             }
             catch (IdException ex)

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ShopWebApi.Data;
 using ShopWebApi.Dtos;
 using ShopWebApi.Models;
@@ -23,29 +24,29 @@ namespace ShopWebApi.Services
             _itemRepository = itemRepository;
             _mapper = mapper;
         }
-        public List<Item> GetAll()
+        public async Task<List<Item>> GetAllAsync()
         {
-            List<Item> items = _itemRepository.GetAll();
+            List<Item> items = await _itemRepository.GetAllAsync();
             return items;
         }
-        public Item GetById(int id)
+        public async Task<Item> GetByIdAsync(int id)
         {
-            Item item = _itemRepository.GetById(id);
+            Item item = await _itemRepository.GetByIdAsync(id);
             if (item == null)
             {
                 throw new ArgumentException("Item with such Id does not exist");
             }
             return item;
         }
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            Item item = GetById(id);
+            Item item = await GetByIdAsync(id);
             _dataContext.Items.Remove(item);
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
-        public int Create(CreateItem createItem)
+        public async Task<int> CreateAsync(CreateItem createItem)
         {
-            bool doesShopExist = _dataContext.Shops.Select(x => x.Id).Contains(createItem.ShopId);
+            bool doesShopExist = await _dataContext.Shops.AnyAsync(x => x.Id == createItem.ShopId);
             if (doesShopExist == false)
             {
                 throw new ArgumentException("Cannot assign to this shop as it does not exist");
@@ -53,13 +54,13 @@ namespace ShopWebApi.Services
             var model = new Item();
             model = _mapper.Map<Item>(createItem);
             _dataContext.Items.Add(model);
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
             return model.Id;
         }
-        public void Update(int id, UpdateItem updateItem)
+        public async Task UpdateAsync(int id, UpdateItem updateItem)
         {
-            Item item = GetById(id);
-            bool doesShopExist = _dataContext.Shops.Select(x => x.Id).Contains(updateItem.ShopId);
+            Item item = await GetByIdAsync(id);
+            bool doesShopExist = await _dataContext.Shops.AnyAsync(x => x.Id == updateItem.ShopId);
             if (doesShopExist == false)
             {
                 throw new ArgumentException("Cannot assign to this shop as it does not exist");
@@ -67,7 +68,7 @@ namespace ShopWebApi.Services
             item.Name = updateItem.Name;
             item.Price = updateItem.Price;
             item.ShopId = updateItem.ShopId;
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
 
         }
     }

@@ -27,51 +27,51 @@ namespace ShopWebApi.Services
             _shopRepository = shopRepository;
             _mapper = mapper;
         }
-        public List<Shop> GetAll()
+        public async Task<List<Shop>> GetAllAsync()
         {
-            List<Shop> shops = _dataContext.Shops.Include("Items").ToList();
+            List<Shop> shops = await _dataContext.Shops.Include("Items").ToListAsync();
             return shops;
         }
-        public Shop GetById(int id)
+        public async Task<Shop> GetByIdAsync(int id)
         {
-            var shop = _dataContext.Shops.Include("Items").Where(i=> i.Id == id).FirstOrDefault();
+            var shop = await _dataContext.Shops.Include("Items").Where(i=> i.Id == id).FirstOrDefaultAsync();
             if (shop == null)
             {
                 throw new IdException(id);
             }
             return shop;
         }
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            Shop shop = GetById(id);
+            Shop shop = await GetByIdAsync(id);
             _dataContext.Shops.Remove(shop);
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
         }
-        public int Create(CreateShop createShop)
+        public async Task<int> CreateAsync(CreateShop createShop)
         {
-            bool doesNameExist = _dataContext.Shops.Select(x => x.Name).Contains(createShop.Name);
+            bool doesNameExist = await _dataContext.Shops.AnyAsync(x => x.Name == createShop.Name);
             if (doesNameExist)
             {
                 throw new ArgumentException("Shop with such name already exists");
             }
             ShopValidator validator = new ShopValidator();
-            validator.ValidateAndThrow(createShop);
+            await validator.ValidateAndThrowAsync(createShop);
             var model = new Shop();
             model = _mapper.Map<Shop>(createShop);
             _dataContext.Shops.Add(model);
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
             return model.Id;
         }
-        public void Update(int id, UpdateShop updateShop)
+        public async Task UpdateAsync(int id, UpdateShop updateShop)
         {
-            Shop shop = GetById(id);
-            bool doesNameExist = _dataContext.Shops.Select(x => x.Name).Contains(updateShop.Name);
+            Shop shop = await GetByIdAsync(id);
+            bool doesNameExist = await _dataContext.Shops.AnyAsync(x => x.Name == updateShop.Name);
             if (doesNameExist)
             {
                 throw new ArgumentException("Shop with such name already exists");
             }
            shop.Name = updateShop.Name;
-            _dataContext.SaveChanges();
+            await _dataContext.SaveChangesAsync();
 
         }
     }
