@@ -13,5 +13,11 @@ export class TodoService {
   public getAllTodos(): Observable<Todo[]> {
     return this.httpclient.get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
   }
-  
+  public deleteTodo(id: number) {
+    return this.httpclient.delete("https://jsonplaceholder.typicode.com/todos/"+id)
+  }
+  public deleteTodoLocal(id: number) {
+    
+  }
+
 }
