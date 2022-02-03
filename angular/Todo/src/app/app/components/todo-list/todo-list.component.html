@@ -14,7 +14,7 @@
     <tr *ngFor="let todo of todos; let thisIndex=index">
       <th>{{ todo.userId }}</th>
       <td>{{ todo.id }}</td>
-      <td>{{ todo.title }}</td>
+      <td>{{ todo.name }}</td>
       <td>{{ todo.completed }}</td>
       <td><button type="button" class="btn btn-primary" (click)="onDeleteLocal(thisIndex)">Delete</button> </td>
     </tr>

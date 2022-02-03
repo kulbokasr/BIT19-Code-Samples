@@ -11,7 +11,7 @@ export class TodoService {
   constructor(private httpclient : HttpClient) { }
 
   public getAllTodos(): Observable<Todo[]> {
-    return this.httpclient.get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
+    return this.httpclient.get<Todo[]>("https://localhost:44323/item")
   }
   public deleteTodo(id: number) {
     return this.httpclient.delete("https://jsonplaceholder.typicode.com/todos/"+id)
