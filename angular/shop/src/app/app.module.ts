@@ -9,6 +9,7 @@ import { ShopCreateComponent } from './components/shop-create/shop-create.compon
 import { HeaderComponent } from './components/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
+import { UpdateShopComponent } from './components/update-shop/update-shop.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { AppRoutingModule } from './app-routing.module';
     ShopListComponent,
     ShopCreateComponent,
     HeaderComponent,
+    UpdateShopComponent,
 
   ],
   imports: [
