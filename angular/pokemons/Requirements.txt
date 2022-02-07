@@ -1,0 +1,15 @@
+https://pokeapi.co/docs/v2
+https://pokeapi.co/api/v2/pokemon/
+
+get 20 pokemons and display them as cards with all object data
+
+pokemon has:
+id
+name
+weigh
+photo (first photo you are able to find)
+type object (first type from types array (you should display type name in card)
+
+extra: find out how many pokemons are in API
+show 20 random pokemons.
+every time show pikachu as first pokemon
