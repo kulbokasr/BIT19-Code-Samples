@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import Shop from 'src/app/models/shop.model';
 import { ShopService } from 'src/app/services/shop.service';
 
@@ -9,10 +10,11 @@ import { ShopService } from 'src/app/services/shop.service';
 })
 export class UpdateShopComponent implements OnInit {
 
-  constructor(private shopService : ShopService) { }
+  constructor(private shopService : ShopService, private location:Location) { }
 
   public shop : Shop = {} as Shop
   ngOnInit(): void {
+   this.shop = history.state
   }
 
   updateShop(id:number, title : string){

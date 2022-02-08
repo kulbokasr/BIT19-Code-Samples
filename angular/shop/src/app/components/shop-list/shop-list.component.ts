@@ -27,5 +27,7 @@ export class ShopListComponent implements OnInit {
   updateShop(id:number, title : string){
     this.shop.name = title
     this.shopService.updateShop(id, this.shop).subscribe(log => console.log('updated '+id))
+    this.shop.tempName = ''
+    location.reload();
   }
 }

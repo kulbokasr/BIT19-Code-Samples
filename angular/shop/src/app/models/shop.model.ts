@@ -1,5 +1,6 @@
 export default interface Shop {
     id : number,
     name : string,
-    createdDate : Date
+    createdDate : Date,
+    tempName : string
 }
