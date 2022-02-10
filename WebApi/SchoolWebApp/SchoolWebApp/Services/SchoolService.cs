@@ -44,7 +44,7 @@ namespace SchoolWebApp.Services
         public async Task<School> CreateSchoolAsync(CreateSchool createSchool)
         {
             bool doesNameExist = await _dataContext.Schools.AnyAsync(x => x.Name == createSchool.Name);
-            if (doesNameExist)
+            if (!doesNameExist)
             {
                 throw new ArgumentException("School with such name already exists");
             }
@@ -61,7 +61,7 @@ namespace SchoolWebApp.Services
         {
             School school = await GetSchoolByIdAsync(id);
             bool doesNameExist = await _dataContext.Schools.AnyAsync(x => x.Name == updateSchool.Name);
-            if (doesNameExist)
+            if (!doesNameExist)
             {
                 throw new ArgumentException("School with such name already exists");
             }

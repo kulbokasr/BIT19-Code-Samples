@@ -44,7 +44,7 @@ namespace SchoolWebApp.Services
         public async Task<Student> CreateStudentAsync(CreateStudent createStudent)
         {
             bool doesSchoolExist = await _dataContext.Schools.AnyAsync(x => x.Id == createStudent.SchoolId);
-            if (doesSchoolExist)
+            if (!doesSchoolExist)
             {
                 throw new ArgumentException("School with such Id does not exist");
             }
@@ -62,7 +62,7 @@ namespace SchoolWebApp.Services
         {
             Student student = await GetStudentByIdAsync(id);
             bool doesSchoolExist = await _dataContext.Schools.AnyAsync(x => x.Id == updateStudent.SchoolId);
-            if (doesSchoolExist)
+            if (!doesSchoolExist)
             {
                 throw new ArgumentException("School with such Id does not exist");
             }

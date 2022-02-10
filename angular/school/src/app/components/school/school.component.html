@@ -1,10 +1,4 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <app-school-list [schoolsInput]="schools"></app-school-list>
-        </div>
-        <div class="col">
-            students list will be here
-        </div>
-    </div>
+            <app-school-list [schoolsInput]="schools" [studentInput]="students" (removeChoolEvent)="removeSchool($event)"></app-school-list>
+            <app-school-create (schoolCreateEvent)="createSchool($event)"></app-school-create> 
 </div>

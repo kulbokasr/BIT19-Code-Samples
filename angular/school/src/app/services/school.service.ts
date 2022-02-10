@@ -17,5 +17,8 @@ export class SchoolService {
   public create(schoolCreate : SchoolCreate) : Observable<School> {
     return this.httpClient.post<School>('https://localhost:44304/School', schoolCreate)
   }
+  public delete(id : number) : Observable<School> {
+    return this.httpClient.delete<School>('https://localhost:44304/School/'+id)
+  }
 
 }
