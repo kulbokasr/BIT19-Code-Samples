@@ -15,6 +15,7 @@ export class StudentCreateComponent implements OnInit {
   }
   @Output() studentCreateEvent = new EventEmitter<StudentCreate>();
   @Input() schoolsInput : School[] = []; 
+  @Input() schoolIdErrorInput : string = ""
 
   constructor() { }
 

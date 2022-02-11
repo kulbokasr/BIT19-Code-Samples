@@ -5,8 +5,9 @@
         <label class="form-label">Name</label>
         <input name="schoolName" [(ngModel)]="schoolName" type="text" class="form-control" #name />
       </div>
-      <button (click)="createSchool()" (click)="name.value=''" type="button" class="btn btn-primary">
+      <button (click)="createSchool()" (click)="name.value=''" (click)="errorInput = null" type="button" class="btn btn-primary">
         Submit
       </button>
-    </form>
+      <div class="error alert alert-danger" *ngIf="errorInput">{{ errorInput }}</div>
+    </form>    
   </div>

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-school-create',
@@ -8,7 +8,9 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 export class SchoolCreateComponent implements OnInit {
  
   @Output() schoolCreateEvent = new EventEmitter<string>();
+  @Input() errorInput : any
   public schoolName : string = '';
+  public hidden : boolean = true;
   constructor() { }
 
   ngOnInit(): void {
