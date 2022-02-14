@@ -16,6 +16,7 @@ export class StudentCreateComponent implements OnInit {
   @Output() studentCreateEvent = new EventEmitter<StudentCreate>();
   @Input() schoolsInput : School[] = []; 
   @Input() schoolIdErrorInput : string = ""
+  @Output() getSchoolsEvent = new EventEmitter<any>();
 
   constructor() { }
 
@@ -24,5 +25,9 @@ export class StudentCreateComponent implements OnInit {
 
   public createStudent(){
     this.studentCreateEvent.emit(this.studentCreate)
+  }
+
+  public getCurrentSchools(){
+    this.getSchoolsEvent.emit()
   }
 }

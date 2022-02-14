@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import SchoolCreate from 'src/app/models/school-create.model';
 import School from 'src/app/models/school.model';
 import Student from 'src/app/models/student.model';
@@ -13,26 +13,23 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class SchoolComponent implements OnInit {
 
-  public schools : School[] = [];
+  @Input() schools : School[] = [];
   public students : Student[] = [];
   public error: any; 
+  @Output() removeChoolEvent = new EventEmitter<number>();
   constructor(private studentService : StudentService, private schoolService : SchoolService) { }
   
   ngOnInit(): void {
-    this.schoolService.getAll().subscribe((schools) => {
-      this.schools = schools;
-    })
+    
     this.studentService.getAll().subscribe((students) => {
       this.students = students
     })
   }
 
-  public removeSchool(removeSchoolEvent: any) : void {
-    let id = removeSchoolEvent
-    this.schoolService.delete(id).subscribe()
-    this.schools = this.schools.filter(s => s.id != id);
-    this.students = this.students.filter(s => s.schoolId !=id)
+  public removeSchool(schoolId: number){
+    this.removeChoolEvent.emit(schoolId);
   }
+  
   public createSchool(schoolCreateEvent: any) : void {
     this.error = null;
     let createSchool: SchoolCreate = {

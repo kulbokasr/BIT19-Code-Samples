@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import School from 'src/app/models/school.model';
 import StudentCreate from 'src/app/models/student-create.model';
 import Student from 'src/app/models/student.model';
@@ -13,17 +13,16 @@ import { StudentService } from 'src/app/services/student.service';
 export class StudentComponent implements OnInit {
 
   constructor(private studentService : StudentService, private schoolService : SchoolService) { }
-  public students : Student[] = [];
+  //public students : Student[] = [];
+  @Input() students : Student[] = [];
   public schools : School[] = []
   public schoolIdError : any;
 
   ngOnInit(): void {
-    this.studentService.getAll().subscribe((students) => {
-      this.students = students
-    })
-    this.schoolService.getAll().subscribe((schools) => {
-      this.schools = schools
-    })
+    // this.studentService.getAll().subscribe((students) => {
+    //   this.students = students
+    // })
+  
   }
 
   public removeStudent(removeStudentEvent: any) : void {
@@ -42,9 +41,12 @@ export class StudentComponent implements OnInit {
         this.schoolIdError = "You must select school for student"
       }
     })
-  
   }
 
-
+  public getCurrentSchools() : void {
+    this.schoolService.getAll().subscribe((schools) => {
+      this.schools = schools
+    })
+  }
 
 }

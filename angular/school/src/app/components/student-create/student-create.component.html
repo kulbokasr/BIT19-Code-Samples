@@ -10,7 +10,7 @@
         <input name="studentCreate.schoolId" [(ngModel)]="studentCreate.schoolId" type="number" class="form-control" #name1 />
       </div> -->
       <label class="form-label">School Id</label>
-      <select class="form-select" [(ngModel)]="studentCreate.schoolId" name="studentCreate.schoolId" >
+      <select class="form-select" [(ngModel)]="studentCreate.schoolId" name="studentCreate.schoolId" (click)="getCurrentSchools()">
         <option *ngFor="let school of schoolsInput" [ngValue]="school.id" >{{school.id}} {{school.name}} </option>
       </select>
       <button (click)="createStudent()" (click)="name.value=''"  type="button" class="btn btn-primary" style="margin-top: 10px;" >

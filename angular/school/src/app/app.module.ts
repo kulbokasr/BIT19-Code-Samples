@@ -10,6 +10,7 @@ import { SchoolCreateComponent } from './components/school-create/school-create.
 import { StudentComponent } from './components/student/student.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { StudentCreateComponent } from './components/student-create/student-create.component';
+import { MasterComponent } from './components/master/master.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { StudentCreateComponent } from './components/student-create/student-crea
     SchoolCreateComponent,
     StudentComponent,
     StudentListComponent,
-    StudentCreateComponent
+    StudentCreateComponent,
+    MasterComponent
   ],
   imports: [
     BrowserModule,
