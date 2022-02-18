@@ -2,6 +2,7 @@
 using SquaresApplication.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,17 @@ namespace SquaresApplication.Services.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Value);
+            }
+
+        }
+        [HttpDelete]
+        public async Task<IActionResult> RemoveAll(List<Point> points)
+        {
+            await _pointService.RemoveAllAsync(points);
+            return Ok("Points deleted");    
         }
     }
 }

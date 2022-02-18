@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import Point from '../models/point-model';
@@ -11,6 +12,7 @@ export class StateService {
   // We are using this to transmit updated Points
   public points$ = new BehaviorSubject<Point[]>([]);
   private points : Point[] = [];
+ 
 
   constructor(private pointService: PointService) { }
 
@@ -20,10 +22,21 @@ export class StateService {
       this.points$.next(this.points)
     })
   }
-  public create(point : Point) {
-    this.pointService.create(point).subscribe((point) => {
+  public create(point : Point) : any { 
+
+    this.pointService.create(point).subscribe(point => {
       this.points.push(point);
-      this.points$.next(this.points)
-    })
-  }
+      this.points$.next(this.points)},
+      (err: HttpErrorResponse) => {
+        console.log(err.error)
+      }
+    )}
+    public deleteAll(points : Point[]){
+      this.pointService.deleteAll(points).subscribe(z => {
+        this.points = [];
+        this.points$.next(this.points)
+      })
+    }
 }
+   
+

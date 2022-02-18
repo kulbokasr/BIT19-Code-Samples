@@ -1,1 +1,52 @@
-<p>points-create works!</p>
+<div class="container-fluid">
+    <h3>Create Point</h3>
+    <form>
+      <div class="mb-3">
+        <label class="form-label">X</label>
+        <input name="pointCreate.x" [(ngModel)]="pointCreate.x" type="text" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Y</label>
+        <input name="pointCreate.y" [(ngModel)]="pointCreate.y" type="text" class="form-control" />
+      </div>
+      <div class="mb-3">
+      <button (click)="createPoint()" type="button" class="btn btn-primary">
+        Submit
+      </button>
+    </div>
+
+    </form>
+
+
+    <!-- <div class="mb-3">
+
+      <input name="pointCreate.x" [(ngModel)]="pointCreate.x" type="file" class="form-control" />
+    </div>
+
+    <button (click)="createPointFromFile('C:/Users/kulbo/projects/.Net-Course/angular/squares/readfromme.txt')"  type="button" class="btn btn-primary" embed src="C:/Users/kulbo/projects/.Net-Course/angular/squares/readfromme.txt">
+        READREADREAD
+      </button>
+
+
+  </div> -->
+
+  <!-- <input type="file" id="file-input" />
+<button id="read-button">Read File</button>
+<pre id="file-contents"></pre>
+
+<button (click)="getFile()" type="button" class="btn btn-primary">
+  Nuuuuuuuuuuuuuuuuuu
+</button>
+
+
+<script>
+	document.querySelector("#read-button").addEventListener('click', function() {
+		let file = document.querySelector("#file-input").files[0];
+		let reader = new FileReader();
+		reader.addEventListener('load', function(e) {
+	    		let text = e.target.result;
+	    		document.querySelector("#file-contents").textContent = text;
+		});
+		reader.readAsText(file);
+	});
+</script> -->

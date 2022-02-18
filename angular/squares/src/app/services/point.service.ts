@@ -15,4 +15,10 @@ export class PointService {
   public create(point : Point) : Observable<Point> {
     return this.httpClient.post<Point>('https://localhost:44393/point', point)
   }
+  public getFile(url: string): Observable<File> {
+    return this.httpClient.get<File>(url);
+  }
+  public deleteAll(points : Point[]) : Observable<Point[]> {
+    return this.httpClient.delete<Point[]>('https://localhost:44393/point',{ body: points })
+  }
 }
