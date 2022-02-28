@@ -47,5 +47,11 @@ namespace SquaresApplication.Services.Controllers
             await _pointService.RemoveAllAsync(points);
             return Ok("Points deleted");    
         }
+        //[HttpDelete]
+        //public async Task<IActionResult> RemovePoint(int x, int y)
+        //{
+        //    await _pointService.RemovePoint(x,y);
+        //    return Ok("Point deleted");
+        //}
     }
 }

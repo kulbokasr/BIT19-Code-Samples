@@ -1,16 +1,19 @@
 <h3>Points</h3>
 
-<table class="table">
+<!-- <table mat-table [dataSource]="points" class="table" >
     <thead>
       <tr>
         <th scope="col">X</th>
         <th scope="col">Y</th>
+        <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
+
       <tr *ngFor="let point of points">
         <td>{{point.x}}</td>
         <td>{{point.y}}</td>
+        <td><button class="btn btn-danger" (click)="deletePoint(point.x, point.y)">Remove</button></td>
       </tr>
     </tbody>
 </table>
@@ -18,5 +21,24 @@
   <button (click)="deleteAll()" type="button" class="btn btn-danger">
     Delete All
   </button>
-</div>
+</div> -->
 
+
+<table mat-table [dataSource]="this.points" class="table" >
+    <thead >
+      <tr >
+        <th scope="col">X</th>
+        <th scope="col">Y</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let point of points">
+        <td>{{point.x}}</td>
+        <td>{{point.y}}</td>
+        <td><button class="btn btn-danger" (click)="deletePoint(point.x, point.y)">Remove</button></td>
+      </tr>
+    </tbody>
+    <mat-paginator #paginator [length]="this.points.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"></mat-paginator>
+</table>

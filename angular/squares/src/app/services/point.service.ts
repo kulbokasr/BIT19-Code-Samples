@@ -21,4 +21,8 @@ export class PointService {
   public deleteAll(points : Point[]) : Observable<Point[]> {
     return this.httpClient.delete<Point[]>('https://localhost:44393/point',{ body: points })
   }
+  public deletePoint(point : Point) : Observable<Point> {
+    return this.httpClient.delete<Point>('https://localhost:44393/point',{ body: point})
+  }
+  
 }

@@ -44,5 +44,11 @@ namespace SquaresApplication.Services
             _dataContext.Points.RemoveRange(points);
             await _dataContext.SaveChangesAsync();
         }
+        public async Task RemovePoint(int x, int y)
+        {
+            Point point = await _dataContext.Points.FindAsync(x, y);
+            _dataContext.Points.Remove(point);
+            await _dataContext.SaveChangesAsync();
+        }
     }
 }
