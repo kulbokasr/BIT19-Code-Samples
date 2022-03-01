@@ -20,11 +20,12 @@ namespace CreditApplicationProject.Controllers
             _applicationService = applicationService;
         }
         [HttpPost("/calculate")]
-        public dynamic GetDecission(Application application)
+
+        public IActionResult GetDecision(Application application)
         {
             try
             {
-                return _applicationService.GetDecision(application);
+                return Ok(_applicationService.GetDecision(application));
             }
             catch (ArgumentException ex)
             {

@@ -1,4 +1,3 @@
-using CreditApplicationProject.Data;
 using CreditApplicationProject.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,8 +30,6 @@ namespace CreditApplicationProject
         {
 
             //services.AddAutoMapper(typeof(MappingProfile));
-            var defaultConnection = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<DataContext>(u => u.UseSqlServer(defaultConnection));
             services.AddTransient<ApplicationService>();
             services.AddControllers();
             services.AddSwaggerGen(c =>

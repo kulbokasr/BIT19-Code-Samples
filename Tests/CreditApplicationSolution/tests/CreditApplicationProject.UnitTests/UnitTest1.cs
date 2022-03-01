@@ -6,13 +6,13 @@ using Xunit;
 
 namespace CreditApplicationProject.UnitTests
 {
-    public class ApplicationServiceTests : IClassFixture<ApplicationService>  
+    public class ApplicationServiceTests
     {
         private readonly ApplicationService _applicationService;
 
-        public ApplicationServiceTests(ApplicationService applicationService)  
+        public ApplicationServiceTests()
         {
-            _applicationService = applicationService;
+            _applicationService = new ApplicationService();
         }
 
         [Fact]
@@ -31,12 +31,13 @@ namespace CreditApplicationProject.UnitTests
                 CurrentCreditAmount = 100,
             };
             //act
-            String testDecision = _applicationService.GetDecision(applicationAnswerNo);
-            //assert parrunink testa 
-            testDecision.Should().Be(correctDecision.ToString());
+            Decision testDecision = _applicationService.GetDecision(applicationAnswerNo);
+            //assert
+            testDecision.Answer.Should().Be(correctDecision.Answer);
+            testDecision.InterestRate.Should().Be(correctDecision.InterestRate);
         }
         [Fact]
-        public void GetDecision_GivenNoCreditValues_GetYesAnswer()
+        public void GetDecision_GivenGoodCreditValues_GetYesAnswer()
         {
             //arrange
             Decision correctDecision = new Decision()
@@ -51,12 +52,13 @@ namespace CreditApplicationProject.UnitTests
                 CurrentCreditAmount = 100,
             };
             //act
-            String testDecision = _applicationService.GetDecision(applicationAnswerNo);
-            //assert parrunink testa 
-            testDecision.Should().Be(correctDecision.ToString());
+            Decision testDecision = _applicationService.GetDecision(applicationAnswerNo);
+            //assert 
+            testDecision.Answer.Should().Be(correctDecision.Answer);
+            testDecision.InterestRate.Should().Be(correctDecision.InterestRate);
         }
         [Fact]
-        public void GetDecision_GivenNoCreditValues_GetYesAnswer2()
+        public void GetDecision_GivenGoodCreditValues_GetYesAnswer2()
         {
             //arrange
             Decision correctDecision = new Decision()
@@ -71,9 +73,30 @@ namespace CreditApplicationProject.UnitTests
                 CurrentCreditAmount = 60000,
             };
             //act
-            String testDecision = _applicationService.GetDecision(applicationAnswerNo);
+            Decision testDecision = _applicationService.GetDecision(applicationAnswerNo);
             //assert
-            testDecision.Should().Be(correctDecision.ToString());
+            testDecision.Answer.Should().Be(correctDecision.Answer);
+            testDecision.InterestRate.Should().Be(correctDecision.InterestRate);
+        }
+        [Fact]
+        public void GetDecision_GivenBadCreditValues_GetError()
+        {
+            //arrange
+            Decision correctDecision = new Decision()
+            {
+                Answer = "Yes",
+                InterestRate = 3
+            };
+            var applicationAnswerNo = new Application()
+            {
+                CreditAmount = -2100,
+                Term = 10,
+                CurrentCreditAmount = -100,
+            };
+            //act
+            //Decision testDecision = _applicationService.GetDecision(applicationAnswerNo);
+            //assert 
+            Assert.Throws<ArgumentException>(() => _applicationService.GetDecision(applicationAnswerNo));
         }
     }
 }
