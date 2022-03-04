@@ -9,20 +9,44 @@ namespace VintedConsoleApp.Services
 {
     public class FileService
     {
-        public async Task<List<ReadDataModel>> ReadFileAsync()
+        private List<ShippingInfo> _providers;
+        private ProvidersService _providersService;
+
+        public FileService(ProvidersService providersService)
+        {
+            _providersService = providersService;
+            _providers = _providersService.GetProviders();
+        }
+
+        public async Task<List<ReadAndUpdate>> ReadFileAsync()
         {
             string[] lines = await File.ReadAllLinesAsync("Data/input.txt");
-            List<ReadDataModel> readData = new List<ReadDataModel>(); 
+            List<ReadAndUpdate> readData = new List<ReadAndUpdate>(); 
             foreach (string line in lines)
             {
                 string[] lineInfo = line.Split(" ");
-                ReadDataModel oneLine = new ReadDataModel()
+                DateOnly date;
+                if (DateOnly.TryParse(lineInfo[0], out date) && _providers.FirstOrDefault(p => p.PackageSize == lineInfo[1]) != null && _providers.FirstOrDefault(p => p.Provider == lineInfo[2]) != null)
                 {
-                    Date = DateOnly.Parse(lineInfo[0]),
-                    PackageSize = lineInfo[1],
-                    Provider = lineInfo[2]
-                };
-                readData.Add(oneLine);
+                    ReadAndUpdate oneLine = new ReadAndUpdate()
+                    {
+                        Date = DateOnly.Parse(lineInfo[0]),
+                        PackageSize = lineInfo[1],
+                        Provider = lineInfo[2],
+                        OriginalPrice = _providers.FirstOrDefault(s => s.PackageSize == lineInfo[1]
+                && s.Provider == lineInfo[2]).Price
+                    };
+                    readData.Add(oneLine);
+                }
+                else
+                {
+                    ReadAndUpdate oneLine = new ReadAndUpdate()
+                    {
+                        ErrorLine = line + " Ignored",
+                        IsError = true
+                    };
+                    readData.Add(oneLine);
+                }
             }
             return readData;
         }

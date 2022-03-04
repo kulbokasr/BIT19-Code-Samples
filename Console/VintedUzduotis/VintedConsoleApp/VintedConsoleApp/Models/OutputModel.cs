@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace VintedConsoleApp.Models
 {
-    public class ReadDataModel
+    public class OutputModel
     {
-        public DateOnly Date { get; set; }
-        public string PackageSize { get; set; }
-        public string Provider { get; set; }
+
     }
 }
