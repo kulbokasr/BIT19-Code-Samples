@@ -7,7 +7,7 @@ using VintedConsoleApp.Models;
 
 namespace VintedConsoleApp.Services
 {
-    public class ProvidersService
+    public class ProvidersService : IProvidersService
     {
         public List<ShippingInfo> providers = new List<ShippingInfo>
         {

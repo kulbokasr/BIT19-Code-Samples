@@ -16,6 +16,7 @@ namespace VintedConsoleApp
         {
             services.AddTransient<FileService>();
             services.AddTransient<InitiateService>();
+            services.AddTransient<IProvidersService, ProvidersService>();
             services.AddTransient<ProvidersService>();
             services.AddTransient<CalculationService>();
             services.AddTransient<PrintService>();

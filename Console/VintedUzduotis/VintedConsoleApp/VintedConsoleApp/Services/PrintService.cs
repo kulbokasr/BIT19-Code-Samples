@@ -21,7 +21,7 @@ namespace VintedConsoleApp.Services
                     case false:
                         {
                             if (item.Discount == 0)
-                            { Console.WriteLine($"{item.Date} {item.PackageSize} {item.Provider} {item.DiscountedPrice.ToString("0.00")} -"); }
+                            { Console.WriteLine($"{item.Date} {item.PackageSize} {item.Provider} {item.DiscountedPrice.ToString("0.00")} - "); }
                             else
                             {
                                 Console.WriteLine($"{item.Date} {item.PackageSize} {item.Provider} {item.DiscountedPrice.ToString("0.00")} {item.Discount.ToString("0.00")} ");

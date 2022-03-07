@@ -10,9 +10,9 @@ namespace VintedConsoleApp.Services
     public class FileService
     {
         private List<ShippingInfo> _providers;
-        private ProvidersService _providersService;
+        private IProvidersService _providersService;
 
-        public FileService(ProvidersService providersService)
+        public FileService(IProvidersService providersService)
         {
             _providersService = providersService;
             _providers = _providersService.GetProviders();
@@ -33,8 +33,7 @@ namespace VintedConsoleApp.Services
                         Date = DateOnly.Parse(lineInfo[0]),
                         PackageSize = lineInfo[1],
                         Provider = lineInfo[2],
-                        OriginalPrice = _providers.FirstOrDefault(s => s.PackageSize == lineInfo[1]
-                && s.Provider == lineInfo[2]).Price
+                        OriginalPrice = _providers.FirstOrDefault(s => s.PackageSize == lineInfo[1] && s.Provider == lineInfo[2]).Price
                     };
                     readData.Add(oneLine);
                 }
@@ -42,7 +41,7 @@ namespace VintedConsoleApp.Services
                 {
                     ReadAndUpdate oneLine = new ReadAndUpdate()
                     {
-                        ErrorLine = line + " Ignored",
+                        ErrorLine = line + " Ignored ",
                         IsError = true
                     };
                     readData.Add(oneLine);
