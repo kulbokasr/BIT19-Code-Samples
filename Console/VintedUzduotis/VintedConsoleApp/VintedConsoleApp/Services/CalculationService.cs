@@ -18,6 +18,14 @@ namespace VintedConsoleApp.Services
             foreach (var item in info)
             {
 
+                var itemIndex = info.IndexOf(item);
+                if (itemIndex - 1 < 0)
+                { itemIndex++; };
+                if (info[itemIndex].Date.Month != info[itemIndex - 1].Date.Month)
+                {
+                    availableDiscount = 10;
+                    LpLshipmentCount = 0;
+                }
 
                 if (item.PackageSize == "S" && item.OriginalPrice > minSPrice)
                 {
@@ -31,11 +39,11 @@ namespace VintedConsoleApp.Services
                     {
                         item.DiscountedPrice = item.OriginalPrice - availableDiscount;
                         item.Discount = availableDiscount;
-                        availableDiscount = 0;  
+                        availableDiscount = 0;
                     }
                     else
                     { item.DiscountedPrice = item.OriginalPrice; }
-                    
+
 
                 }
                 else if (item.PackageSize == "L" && item.Provider == "LP")
@@ -53,6 +61,7 @@ namespace VintedConsoleApp.Services
                 {
                     item.DiscountedPrice = item.OriginalPrice;
                 }
+
             }
             return info;
         }
