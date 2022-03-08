@@ -22,5 +22,18 @@ namespace VintedConsoleApp.Services
                     $"{(item.Discount == 0 ? "-" : item.Discount.ToString("0.00"))} ");
             }
         }
+        public void PrintToFile(List<ReadAndUpdate> info)
+        {
+            foreach (var item in info)
+            {
+                if (item.IsError)
+                {
+                    File.AppendAllText("WriteLines.txt", ($"{item.ErrorLine}\r\n"));
+                    continue;
+                }
+                File.AppendAllText("WriteLines.txt", ($"{item.Date} {item.PackageSize} {item.Provider} {item.DiscountedPrice.ToString("0.00")} " +
+                    $"{(item.Discount == 0 ? "-" : item.Discount.ToString("0.00"))} \r\n "));
+            }
+        }
     }
 }

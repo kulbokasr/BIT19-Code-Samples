@@ -25,6 +25,7 @@ namespace VintedConsoleApp.Services
             var allinfo = await _fileService.ReadFileAsync();
             var calculatedInfo = _calculationService.Calculate(allinfo);
             _printService.PrintToConsole(calculatedInfo);
+            _printService.PrintToFile(calculatedInfo);
         }
     }
 }
