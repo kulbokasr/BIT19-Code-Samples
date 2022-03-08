@@ -9,6 +9,8 @@ namespace VintedConsoleApp.Services
 {
     public class CalculationService
     {
+        //https://refactoring.guru/design-patterns/factory-method/csharp/example
+        //https://codewithshadman.com/strategy-pattern-csharp/
         public List<ReadAndUpdate> Calculate(List<ReadAndUpdate> info)
         {
             var minSPrice = info.Where(p => p.PackageSize == "S").Min(p => p.OriginalPrice);
@@ -20,7 +22,10 @@ namespace VintedConsoleApp.Services
 
                 var itemIndex = info.IndexOf(item);
                 if (itemIndex - 1 < 0)
-                { itemIndex++; };
+                { 
+                    itemIndex++; 
+                };
+
                 if (info[itemIndex].Date.Month != info[itemIndex - 1].Date.Month)
                 {
                     availableDiscount = 10;

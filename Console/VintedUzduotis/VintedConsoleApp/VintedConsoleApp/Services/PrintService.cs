@@ -13,23 +13,13 @@ namespace VintedConsoleApp.Services
         {
             foreach (var item in info)
             {
-                switch (item.IsError)
+                 if (item.IsError)
                 {
-                    case true:
-                        Console.WriteLine(item.ErrorLine);
-                        break;
-                    case false:
-                        {
-                            if (item.Discount == 0)
-                            { Console.WriteLine($"{item.Date} {item.PackageSize} {item.Provider} {item.DiscountedPrice.ToString("0.00")} - "); }
-                            else
-                            {
-                                Console.WriteLine($"{item.Date} {item.PackageSize} {item.Provider} {item.DiscountedPrice.ToString("0.00")} {item.Discount.ToString("0.00")} ");
-                            }
-                        }
-                        break;
+                    Console.WriteLine(item.ErrorLine);
+                    continue;
                 }
-
+                Console.WriteLine($"{item.Date} {item.PackageSize} {item.Provider} {item.DiscountedPrice.ToString("0.00")} " +
+                    $"{(item.Discount == 0 ? "-" : item.Discount.ToString("0.00"))} ");
             }
         }
     }
