@@ -20,47 +20,15 @@ namespace VintedConsoleApp.Services
             foreach (var item in info)
             {
 
-                var itemIndex = info.IndexOf(item);
-                if (itemIndex - 1 < 0)
-                { 
-                    itemIndex++; 
-                };
-
-                if (info[itemIndex].Date.Month != info[itemIndex - 1].Date.Month)
-                {
-                    availableDiscount = 10;
-                    LpLshipmentCount = 0;
-                }
+                (info, availableDiscount, LpLshipmentCount) = CheckIfMonthChange(item, info, availableDiscount, LpLshipmentCount);
 
                 if (item.PackageSize == "S" && item.OriginalPrice > minSPrice)
                 {
-                    item.Discount = item.OriginalPrice - minSPrice;
-                    if (item.Discount < availableDiscount)
-                    {
-                        item.DiscountedPrice = item.OriginalPrice - item.Discount;
-                        availableDiscount -= item.Discount;
-                    }
-                    else if (item.Discount > availableDiscount)
-                    {
-                        item.DiscountedPrice = item.OriginalPrice - availableDiscount;
-                        item.Discount = availableDiscount;
-                        availableDiscount = 0;
-                    }
-                    else
-                    { item.DiscountedPrice = item.OriginalPrice; }
-
-
+                    (info, availableDiscount) = PackageSDiscount(item, info, availableDiscount, minSPrice);
                 }
                 else if (item.PackageSize == "L" && item.Provider == "LP")
                 {
-                    LpLshipmentCount++;
-                    item.DiscountedPrice = item.OriginalPrice;
-                    if (LpLshipmentCount == 3)
-                    {
-                        item.Discount = item.OriginalPrice;
-                        item.DiscountedPrice = 0;
-                        availableDiscount -= item.Discount;
-                    }
+                    (info, availableDiscount, LpLshipmentCount) = PackageLDiscount(item, info, availableDiscount, LpLshipmentCount);
                 }
                 else
                 {
@@ -69,6 +37,52 @@ namespace VintedConsoleApp.Services
 
             }
             return info;
+        }
+
+        public (List<ReadAndUpdate> , decimal , int) CheckIfMonthChange(ReadAndUpdate item, List<ReadAndUpdate> info, decimal availableDiscount, int LpLshipmentCount)
+        {
+            var itemIndex = info.IndexOf(item);
+            if (itemIndex - 1 < 0)
+            {
+                itemIndex++;
+            };
+
+            if (info[itemIndex].Date.Month != info[itemIndex - 1].Date.Month)
+            {
+                availableDiscount = 10;
+                LpLshipmentCount = 0;
+            }
+            return (info, availableDiscount, LpLshipmentCount);
+        }
+        public (List<ReadAndUpdate>, decimal) PackageSDiscount(ReadAndUpdate item, List<ReadAndUpdate> info, decimal availableDiscount, decimal minSPrice)
+        {
+            item.Discount = item.OriginalPrice - minSPrice;
+            if (item.Discount < availableDiscount)
+            {
+                item.DiscountedPrice = item.OriginalPrice - item.Discount;
+                availableDiscount -= item.Discount;
+            }
+            else if (item.Discount > availableDiscount)
+            {
+                item.DiscountedPrice = item.OriginalPrice - availableDiscount;
+                item.Discount = availableDiscount;
+                availableDiscount = 0;
+            }
+            else
+            { item.DiscountedPrice = item.OriginalPrice; }
+            return (info, availableDiscount);
+        }
+        public (List<ReadAndUpdate>, decimal, int) PackageLDiscount(ReadAndUpdate item, List<ReadAndUpdate> info, decimal availableDiscount, int LpLshipmentCount)
+        {
+            LpLshipmentCount++;
+            item.DiscountedPrice = item.OriginalPrice;
+            if (LpLshipmentCount == 3)
+            {
+                item.Discount = item.OriginalPrice;
+                item.DiscountedPrice = 0;
+                availableDiscount -= item.Discount;
+            }
+            return (info, availableDiscount, LpLshipmentCount);
         }
     }
 }
