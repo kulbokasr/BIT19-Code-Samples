@@ -13,7 +13,7 @@ namespace VintedConsoleApp.Services
         {
             foreach (var item in info)
             {
-                 if (item.IsError)
+                if (item.IsError)
                 {
                     Console.WriteLine(item.ErrorLine);
                     continue;

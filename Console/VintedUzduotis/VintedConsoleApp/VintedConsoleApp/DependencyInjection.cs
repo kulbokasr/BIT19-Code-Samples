@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VintedConsoleApp.Discounts;
 using VintedConsoleApp.Services;
 
 namespace VintedConsoleApp
@@ -20,6 +21,7 @@ namespace VintedConsoleApp
             services.AddTransient<ProvidersService>();
             services.AddTransient<CalculationService>();
             services.AddTransient<PrintService>();
+            services.AddTransient<DiscountFactory>();
         }
 
     }
