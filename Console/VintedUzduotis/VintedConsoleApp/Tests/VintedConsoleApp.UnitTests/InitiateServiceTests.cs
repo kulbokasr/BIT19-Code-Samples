@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using VintedConsoleApp.Discounts;
 using VintedConsoleApp.Models;
 using VintedConsoleApp.Services;
 using Xunit;
@@ -17,20 +18,20 @@ namespace VintedConsoleApp.UnitTests
         {
             var providers = new List<ShippingInfo>
             {
-            new ShippingInfo() { Provider = "LP", PackageSize = "S", Price = 1.5M },
-            new ShippingInfo() { Provider = "LP", PackageSize = "M", Price = 4.9M },
-            new ShippingInfo() { Provider = "LP", PackageSize = "L", Price = 6.9M },
-            new ShippingInfo() { Provider = "MR", PackageSize = "S", Price = 2M },
-            new ShippingInfo() { Provider = "MR", PackageSize = "M", Price = 3M },
-            new ShippingInfo() { Provider = "MR", PackageSize = "L", Price = 4M }
+                new ShippingInfo() { Provider = "LP", PackageSize = "S", Price = 1.5M },
+                new ShippingInfo() { Provider = "LP", PackageSize = "M", Price = 4.9M },
+                new ShippingInfo() { Provider = "LP", PackageSize = "L", Price = 6.9M },
+                new ShippingInfo() { Provider = "MR", PackageSize = "S", Price = 2M },
+                new ShippingInfo() { Provider = "MR", PackageSize = "M", Price = 3M },
+                new ShippingInfo() { Provider = "MR", PackageSize = "L", Price = 4M }
             };
 
             var providersServiceMock = new Mock<IProvidersService>();
             providersServiceMock.Setup(x => x.GetProviders()).Returns(providers);
 
             var fileService = new  FileService(providersServiceMock.Object);
-
-            var calculationService = new CalculationService();
+            var discountFactory = new DiscountFactory();
+            var calculationService = new CalculationService(discountFactory);
             var printService = new PrintService();
 
             var initiateService = new InitiateService(fileService, calculationService, printService);
