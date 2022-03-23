@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Aging.Products
 {
-    public class BackstagePasses : IProduct
+    public class BackstagePasses : IStrategy
     {
         public void UpdateQuality(Item item)
         {
@@ -30,6 +30,10 @@ namespace GildedRose.Aging.Products
             {item.Quality = 50;}
 
             item.SellIn --;
+        }
+        public bool Applies(string name)
+        {
+            return name.StartsWith("Backstage passes");
         }
     }
 }

@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Aging.Products
 {
-    public class Sulfuras : IProduct
+    public class Sulfuras : IStrategy
     {
         public void UpdateQuality(Item item)
         {
             item.Quality = 80;
             //item.SellIn -= 1;
+        }
+        public bool Applies(string name)
+        {
+            return name.StartsWith("Sulfuras");
         }
     }
 }

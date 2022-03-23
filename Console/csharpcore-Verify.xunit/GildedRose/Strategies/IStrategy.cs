@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Aging
 {
-    public interface IProduct
+    public interface IStrategy
     {
+        bool Applies(string name);
         void UpdateQuality(Item item);
     }
 }

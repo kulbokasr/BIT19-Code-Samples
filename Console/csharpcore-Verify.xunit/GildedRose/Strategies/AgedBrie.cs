@@ -7,22 +7,29 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Aging.Products
 {
-    public class Conjured : IProduct
+    public class AgedBrie : IStrategy
     {
+
         public void UpdateQuality(Item item)
         {
-            if (item.Quality > 0)
+            if (item.Quality < 50)
             {
-                if (item.SellIn > -1)
+                if (item.SellIn > 0)
                 {
-                    item.Quality -= 2;
+                    item.Quality ++;
                 }
                 else
                 {
-                    item.Quality -= 4;
+                    item.Quality += 2;
                 }
+                if (item.Quality > 50)
+                { item.Quality = 50; }
             }
             item.SellIn --;
+        }
+        public bool Applies(string name)
+        {
+            return name.StartsWith("Aged Brie");
         }
     }
 }

@@ -17,18 +17,16 @@ namespace WordCountTests
         [Test]
         public void GetWordsAndCharactersCount_GivenSampleText_CalculatesCorrectly()
         {
-            var fileServiceMock = new Mock<IFileService>();
-            fileServiceMock.Setup(f => f.ReadFile()).Returns("Just three words are");
+            Mock<IFileService> fileServiceMock = new Mock<IFileService>();
+            fileServiceMock.Setup(f => f.ReadFile()).Returns("Count three words");
 
             var WordCountService = new WordCountService(fileServiceMock.Object);
 
             string[] words = {};
             int CharacterCount = 0;
             (words, CharacterCount) = WordCountService.CountWordsAndPrint();
-            words.Length.Should().Be(4);
-            CharacterCount.Should().Be(20);
-            //words.Length.Should().Be(3);
-            //CharacterCount.Should().Be(17);
+            words.Length.Should().Be(3);
+            CharacterCount.Should().Be(17);
         }
     }
 }

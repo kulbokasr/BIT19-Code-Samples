@@ -22,10 +22,10 @@ namespace GildedRoseTests
                 SellIn = -48,
                 Quality = 50
             };
-            var _productFactory = new ProductFactory();
+            var _productFactory = new CalculationService();
             for (var i = 0; i < 50; i++)
             {
-                _productFactory.ChooseProduct(AgedBrieItem).UpdateQuality(AgedBrieItem);
+                _productFactory.ChooseProduct(AgedBrieItem);
             }
             AgedBrieItem.Quality.Should().Be(AgedBrieControlItem.Quality);
             AgedBrieItem.SellIn.Should().Be(AgedBrieControlItem.SellIn);

@@ -14,7 +14,6 @@ var services = new ServiceCollection();
 static void ConfigureServices(IServiceCollection services)
 {
     services.AddTransient<IFileService, FileService>();
-    //services.AddTransient<FileService>();
     services.AddTransient<WordCountService>();
 }
 

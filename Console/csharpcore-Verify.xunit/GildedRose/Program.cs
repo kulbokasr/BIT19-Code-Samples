@@ -8,7 +8,7 @@ namespace GildedRoseKata
     {
         public static void Main(string[] args)
         {
-            var _productFactory = new ProductFactory();
+            var _productFactory = new CalculationService();
 
             Console.WriteLine("OMGHAI!");
 
@@ -32,7 +32,7 @@ namespace GildedRoseKata
                 foreach (Item v in Items)
                 {
                     System.Console.WriteLine(v.Name + ", " + v.SellIn + ", " + v.Quality);
-                    _productFactory.ChooseProduct(v).UpdateQuality(v);
+                    _productFactory.ChooseProduct(v);
                 }
                 Console.WriteLine("");
             }

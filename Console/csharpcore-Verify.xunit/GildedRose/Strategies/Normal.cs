@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GildedRose.Aging.Products
 {
-    public class Normal : IProduct
+    public class Normal : IStrategy
     {
         public void UpdateQuality(Item item)
         {
@@ -21,8 +21,14 @@ namespace GildedRose.Aging.Products
                 {
                     item.Quality -= 2;
                 }
+                if (item.Quality < 0)
+                { item.Quality = 0; }
             }
             item.SellIn --;
+        }
+        public bool Applies(string name)
+        {
+            return true;
         }
     }
 }
