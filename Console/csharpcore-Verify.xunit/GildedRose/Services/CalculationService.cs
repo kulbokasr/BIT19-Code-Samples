@@ -10,7 +10,7 @@ namespace GildedRose.Aging
 {
     public class CalculationService
     {
-        public void ChooseProduct(Item item)
+        public void ChooseAndUpadateProduct(Item item)
         {
             List<IStrategy> strategies = new List<IStrategy>
             {

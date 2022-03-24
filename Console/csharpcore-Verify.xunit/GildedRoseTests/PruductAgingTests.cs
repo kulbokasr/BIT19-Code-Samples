@@ -25,7 +25,7 @@ namespace GildedRoseTests
             var _productFactory = new CalculationService();
             for (var i = 0; i < 50; i++)
             {
-                _productFactory.ChooseProduct(AgedBrieItem);
+                _productFactory.ChooseAndUpadateProduct(AgedBrieItem);
             }
             AgedBrieItem.Quality.Should().Be(AgedBrieControlItem.Quality);
             AgedBrieItem.SellIn.Should().Be(AgedBrieControlItem.SellIn);
