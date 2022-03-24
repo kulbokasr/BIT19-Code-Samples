@@ -15,6 +15,7 @@ static void ConfigureServices(IServiceCollection services)
 {
     services.AddTransient<IFileService, FileService>();
     services.AddTransient<WordCountService>();
+    services.AddTransient<IApiWordCheckService, ApiWordCheckService>();
 }
 
 ConfigureServices(services);

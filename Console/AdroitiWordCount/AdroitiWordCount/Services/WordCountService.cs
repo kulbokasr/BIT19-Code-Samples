@@ -11,30 +11,22 @@ namespace AdroitiWordCount.Services
     public class WordCountService
     {
         private IFileService _fileService;
+        private IApiWordCheckService _apiWordCheckService;
 
-        public WordCountService(IFileService fileService)
+        public WordCountService(IFileService fileService, IApiWordCheckService apiWordCheckService)
         {
             _fileService = fileService;
+            _apiWordCheckService = apiWordCheckService;
         }
 
         public (string[] words, int CharacterCount) CountWordsAndPrint()
         {
-            NetSpell.SpellChecker.Dictionary.WordDictionary oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
-            oDict.DictionaryFile = ("~/App_Data/Dictionaries/en-US.dic");
-            oDict.Initialize();
-            NetSpell.SpellChecker.Spelling oSpell = new NetSpell.SpellChecker.Spelling();
-            oSpell.Dictionary = oDict;
             var allText = _fileService.ReadFile();
-            //Console.WriteLine(allText);
+            Console.WriteLine(allText);
             string[] words = allText.Split(" ");
             int englishWords = 0;
-            foreach (string word in words)
-            {
-                if (oSpell.TestWord(word))
-                {
-                    englishWords++;
-                }
-            }
+            englishWords = _apiWordCheckService.CountEnglishWords(words).Result;
+            Console.WriteLine("Why not write?");
             int CharacterCount = allText.Length;
             Console.WriteLine($"There are {words.Length.ToString()} words, {englishWords} English words and {CharacterCount.ToString()} characters in the file");
             return (words, CharacterCount);
