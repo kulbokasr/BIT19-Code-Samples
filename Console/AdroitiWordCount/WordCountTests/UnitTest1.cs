@@ -15,9 +15,9 @@ namespace WordCountTests
         }
 
         [Test]
-        public async void GetWordsAndCharactersCount_GivenSampleText_CalculatesCorrectly()
+        public void GetWordsAndCharactersCount_GivenSampleText_CalculatesCorrectly()
         {
-            string[] names = { }
+            string[] names = { };
             Mock<IFileService> fileServiceMock = new Mock<IFileService>();
             fileServiceMock.Setup(f => f.ReadFile()).Returns("Count three words");
             Mock<IApiWordCheckService> apiWordCheckServiceMock = new Mock<IApiWordCheckService>();
