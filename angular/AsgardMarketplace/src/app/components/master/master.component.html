@@ -1,0 +1,11 @@
+<div class="container-fluid" style="margin-top: 0.5cm;"   >
+    <div class="row align-items-start">
+      <div class="col">
+        <div>Choose which user orders you want to see:</div>
+        <select class="form-select" [(ngModel)]="userId" name="userId" (click)="listorders(userId)">
+          <option *ngFor="let number of users" [ngValue]="number" > {{number}} </option>
+        </select>
+        <app-order [orders]="orders" ></app-order>
+      </div>
+    </div>
+  </div>

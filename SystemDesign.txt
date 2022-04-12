@@ -1,0 +1,34 @@
+Resources:
+1. Order
+2. Item
+
+Endpoints:
+OrderController:
+   POST /Order {itemId: 4, userId: 1}
+   PUT /Order/{id}/Pay
+   PUT /Order/{id}/Complete
+
+   DELETE /Order/{id}
+
+   GET /order?userId=1 (Query Parameters/filtering)
+
+Item:
+    
+
+
+Entities:
+
+User:
+Id,
+Name
+
+Order:
+Id,
+Status: Created | Paid | Completed
+OrderDate
+
+Item:
+Id,
+Price,
+Name,
+OrderId?

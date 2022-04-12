@@ -12,7 +12,6 @@ namespace VintedConsoleApp.Discounts
     {
         public IDiscount ChooseDiscount(ReadAndUpdate item, decimal minSPrice)
         {
-            // Logic which will decide which discount to pick
             if (item.PackageSize == "S" && item.OriginalPrice > minSPrice)
             {
                 return new SmallPackageDiscount();

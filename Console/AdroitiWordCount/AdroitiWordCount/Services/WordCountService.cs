@@ -26,7 +26,6 @@ namespace AdroitiWordCount.Services
             string[] words = allText.Split(" ");
             int englishWords = 0;
             englishWords = _apiWordCheckService.CountEnglishWords(words).Result;
-            Console.WriteLine("Why not write?");
             int CharacterCount = allText.Length;
             Console.WriteLine($"There are {words.Length.ToString()} words, {englishWords} English words and {CharacterCount.ToString()} characters in the file");
             return (words, CharacterCount);

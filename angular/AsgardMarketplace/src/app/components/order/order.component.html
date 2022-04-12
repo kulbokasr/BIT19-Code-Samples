@@ -1,0 +1,24 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Order date</th>
+        <th scope="col">Pay</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <th scope="row">1</th>
+        <td>{{order.id}}</td>
+        <td>{{order.status}}</td>
+        <td>{{order.orderDate | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+        <td>      
+          <button (click)="markAsPaid(order.id)" type="button" class="btn btn-primary">
+          Mark as Paid
+          </button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
